@@ -20,8 +20,11 @@ app.use((req, res, next) => {
     
     next();
  });
+//Cargar Rutas
+ var persona_routes = require('./routes/personaRoute');
 
-
+// Rutas Bases
+app.use('/Daniels&Aljure', persona_routes);
 
 app.listen(port, function () {
     console.log('Servidor Corriendo en el Puerto #' + port);
