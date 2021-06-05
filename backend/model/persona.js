@@ -90,6 +90,10 @@ module.exports = db.Sequelize.define(
         fecha_Eliminado_PERSONA: {
             type:
                 Sequelize.DATE
+        },
+        imagen_PERSONA: {
+            type:
+                sequelize.STRING
         }
     }
 );
