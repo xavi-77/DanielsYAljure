@@ -1,3 +1,4 @@
+'use strict'
 var express = require('express');
 var cors = require('cors');
 const db = require('./database/db');

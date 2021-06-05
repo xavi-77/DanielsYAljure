@@ -1,3 +1,4 @@
+'use strict'
 const Sequelize = require('sequelize');
 const db = {};
 const sequelize = new Sequelize('valhalla_thor','root','',{
