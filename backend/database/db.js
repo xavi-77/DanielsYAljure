@@ -11,9 +11,6 @@ const sequelize = new Sequelize('valhalla_thor','root','',{
         acquire:30000,
         idle: 10000
     }
-    
-    
-
 });
 
 
