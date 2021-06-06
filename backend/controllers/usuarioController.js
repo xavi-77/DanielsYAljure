@@ -187,7 +187,6 @@ module.exports = {
     login,
     updateUsuario,
     listUsuario,
-    getUserFull,
     deleteUsuario,
     getUserClientes,
     getUserAbogados,
