@@ -15,6 +15,7 @@ const sequelize = new Sequelize('valhalla_thor','root','',{
 });
 
 
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

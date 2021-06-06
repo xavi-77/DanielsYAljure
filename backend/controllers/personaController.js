@@ -6,29 +6,29 @@ var dbat = require('../database/db');
 function savePerson(req, res) {
     const today = new Date();
     const personData = {
-        nombres_PERSONA: req.body.nombres,
-        p_Apellido_PERSONA: req.body.p_Apellido,
-        s_Apellido_PERSONA: req.body.s_Apellido,
-        tipo_Documento_PERSONA: req.body.tipo_Documento,
-        num_Documento_PERSONA: req.body.num_documento,
-        fecha_Nacimiento_PERSONA: req.body.fecha_nac,
-        direccion_PERSONA: req.body.direccion,
-        telefono_PERSONA: req.body.telefono,
-        celular_PERSONA: req.body.celular,
-        entidad_Laboral_PERSONA: req.body.entidad_Laboral,
-        tiempo_Laboral_PERSONA: req.body.tiempo_Laboral,
-        direccion_Empresa_PERSONA: req.body.direccion_Empresa,
-        tel_Empresa_PERSONA: req.body.tel_Empresa,
-        pensionado_PERSONA: req.body.pensionado,
-        entidad_Pension_PERSONA: req.body.entidad_Pension,
-        estado_Usuario_PERSONA: req.body.estado_Usuario,
+        nombres_PERSONA: req.body.nombres_PERSONA,
+        p_Apellido_PERSONA: req.body.p_Apellido_PERSONA,
+        s_Apellido_PERSONA: req.body.s_Apellido_PERSONA,
+        tipo_Documento_PERSONA: req.body.tipo_Documento_PERSONA,
+        num_Documento_PERSONA: req.body.num_Documento_PERSONA,
+        fecha_Nacimiento_PERSONA: req.body.fecha_Nacimiento_PERSONA,
+        direccion_PERSONA: req.body.direccion_PERSONA,
+        telefono_PERSONA: req.body.telefono_PERSONA,
+        celular_PERSONA: req.body.celular_PERSONA,
+        entidad_Laboral_PERSONA: req.body.entidad_Laboral_PERSONA,
+        tiempo_Laboral_PERSONA: req.body.tiempo_Laboral_PERSONA,
+        direccion_Empresa_PERSONA: req.body.direccion_Empresa_PERSONA,
+        tel_Empresa_PERSONA: req.body.tel_Empresa_PERSONA,
+        pensionado_PERSONA: req.body.pensionado_PERSONA,
+        entidad_Pension_PERSONA: req.body.entidad_Pension_PERSONA,
+        estado_Usuario_PERSONA: req.body.estado_Usuario_PERSONA,
         tipo_PERSONA: req.body.tipo_PERSONA,
         fecha_Creado_PERSONA: today,
         imagen_PERSONA: req.body.imagen_PERSONA
     }
     Persona.findOne({
         where: {
-            num_Documento_PERSONA: req.body.num_documento
+            num_Documento_PERSONA: req.body.num_Documento_PERSONA
         }
     }).then(persona => {
         if (!persona) {
