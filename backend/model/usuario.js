@@ -24,7 +24,8 @@ module.exports = db.sequelize.define(
         },
         id_Persona_USUARIO: {
             type:
-                Sequelize.INTEGER
+                Sequelize.INTEGER,
+                primaryKey: true  
         },
         fecha_Creado_USUARIO: {
             type:
