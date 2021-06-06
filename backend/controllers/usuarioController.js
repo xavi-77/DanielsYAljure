@@ -4,12 +4,11 @@ var bcrypt = require('bcrypt');
 var User = require('../model/usuario');
 const jwt = require('../services/jwt');
 var dbat = require('../database/db');
-
+const saltRounds = 12;
 
 function saveUsuario(req, res) {
 
     const today = new Date();
-    const saltRounds = 12;
     var correousuario = req.body.correo_USUARIO;
     const userData = {
         correo_USUARIO: correousuario.toUpperCase(),
@@ -45,15 +44,14 @@ function saveUsuario(req, res) {
 };
 
 function login(req, res) {
-    const correo = req.body.correo_USUARIO;
     User.findOne({
         where: {
-            correo_USUARIO: correo.toUpperCase()
+            correo_USUARIO: req.body.correo_USUARIO
         }
     })
         .then(user => {
-            bcrypt.compare(req.body.contra_USUARIO, hash, function(err, result) {
-                if (check) {
+            bcrypt.compare(req.body.contra_USUARIO, user.contra_USUARIO, function (err, result) {
+                if (result) {
                     if (req.body.gethash) {
                         res.status(200).send({
                             token: jwt.createToken(user)
