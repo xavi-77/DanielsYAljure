@@ -10,8 +10,9 @@ function saveUsuario(req, res) {
 
     const today = new Date();
     const saltRounds = 12;
+    var correousuario = req.body.correo_USUARIO;
     const userData = {
-        correo_USUARIO: req.body.correo_USUARIO.toUpperCase(),
+        correo_USUARIO: correousuario.toUpperCase(),
         contra_USUARIO: req.body.contra_USUARIO,
         tipo_USUARIO: req.body.tipo_USUARIO,
         id_Persona_USUARIO: req.body.id_Persona_USUARIO,
@@ -19,7 +20,7 @@ function saveUsuario(req, res) {
     }
     User.findOne({
         where: {
-            correo: req.body.correo_USUARIO
+            correo_USUARIO: req.body.correo_USUARIO
         }
     }).then(user => {
         if (!user) {
