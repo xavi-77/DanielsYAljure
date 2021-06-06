@@ -21,10 +21,12 @@ app.use((req, res, next) => {
     next();
  });
 //Cargar Rutas
- var persona_routes = require('./routes/personaRoute');
+var persona_routes = require('./routes/personaRoute');
+var usuario_routes = require('./routes/usuarioRoute');
 
 // Rutas Bases
 app.use('/Daniels&Aljure', persona_routes);
+app.use('/Daniels&Aljure', usuario_routes);
 
 app.listen(port, function () {
     console.log('Servidor Corriendo en el Puerto #' + port);
