@@ -46,23 +46,28 @@ function saveUsuario(req, res) {
 function login(req, res) {
     User.findOne({
         where: {
-            correo_USUARIO: req.body.correo_USUARIO
+            correo_USUARIO: req.body.correo_USUARIO,
+            estado_USUARIO: 'ACTIVO'
         }
     })
         .then(user => {
-            bcrypt.compare(req.body.contra_USUARIO, user.contra_USUARIO, function (err, result) {
-                if (result) {
-                    if (req.body.gethash) {
-                        res.status(200).send({
-                            token: jwt.createToken(user)
-                        });
+            if(user){
+                bcrypt.compare(req.body.contra_USUARIO, user.contra_USUARIO, function (err, result) {
+                    if (result) {
+                        if (req.body.gethash) {
+                            res.status(200).send({
+                                token: jwt.createToken(user)
+                            });
+                        } else {
+                            res.status(200).send({ user })
+                        }
                     } else {
-                        res.status(200).send({ user })
+                        res.status(404).send({ message: 'La cuenta o la contraseña es incorrecta. Si no recuerdas la cuenta o la contraseña pida ayuda al administrador!' });
                     }
-                } else {
-                    res.status(404).send({ message: 'La cuenta o la contraseña es incorrecta. Si no recuerdas la cuenta o la contraseña pida ayuda al administrador!' });
-                }
-            });
+                });
+            }else{
+                res.status(404).send({ message: 'La cuenta esta desactivada...!' });
+            }
 
         })
         .catch(err => {
@@ -72,12 +77,17 @@ function login(req, res) {
 
 function updateUsuario(req, res) {
     var userId = req.params.id;
+    const today = new Date();
     User.findOne({ where: { idUsuario: userId } })
         .then(user => {
             User.update({
-                correo_USUARIO: req.body.correo_USUARIO.toUpperCase(),
+                nombre_USUARIO: req.body.nombre_USUARIO,
+                p_Apellido_USUARIO: req.body.p_Apellido_USUARIO,
+                s_Apellido_USUARIO: req.body.s_Apellido_USUARIO,
+                correo_USUARIO: req.body.correo_USUARIO,
                 contra_USUARIO: req.body.contra_USUARIO,
-                tipo_USUARIO: req.body.tipo_USUARIO.toUpperCase(),
+                tipo_USUARIO: req.body.tipo_USUARIO,
+                estado_USUARIO: req.body.estado_USUARIO,
                 id_Persona_USUARIO: req.body.id_Persona_USUARIO,
                 fecha_Modificado_PERSONA: today
             }, { where: { idUsuario: userId } })
@@ -96,20 +106,42 @@ function listUsuario(req, res) {
 
 function deleteUsuario(req, res) {
     var userId = req.params.id;
-    User.findByPk(userId)
+    var codigo = req.body.codigo;
+    const today = new Date();
+    User.findOne({ where: { idUsuario: userId } })
         .then(user => {
-            user.destroy();
-            res.status(200).json({ message: 'Usuario Eliminado...!' });
+            if (codigo == user.codigo_Seguridad_USUARIO) {
+                User.update({
+                    estado_USUARIO: req.body.estado_USUARIO,
+                    fecha_Eliminado_PERSONA: today
+                }, {
+                    where: { idUsuario: userId }
+
+                }).then(nuevoUsuario => {
+                    res.status(200).json({ message: 'Usuario Eliminado...!' });
+                })
+            }else{
+                res.status(404).json({ message: 'Su código de verificación no es válido...!' });
+            }
+
         })
-        .catch(err => {
-            res.status(404).json({ message: 'Usuario No Existe...!' });
-        });
 };
 
 function getUserClientes(req, res) {
     dbat.sequelize.query('SELECT * FROM usuarios WHERE tipo_USUARIO = :tipo_USUARIO ',
         {
             replacements: { tipo_USUARIO: 'CLIENTE' },
+            type: dbat.sequelize.QueryTypes.SELECT
+        }
+    ).then(usuario => {
+        console.log(usuario);
+    })
+};
+
+function getPersona(req, res) {
+    dbat.sequelize.query('SELECT * FROM usuarios u JOIN personas p ON u.id_Persona_USUARIO = p.idPersonas WHERE p.idPersonas= :idPersonas',
+        {
+            replacements: { idPersonas: '2' },
             type: dbat.sequelize.QueryTypes.SELECT
         }
     ).then(usuario => {
@@ -179,6 +211,21 @@ function getImageFile(req, res) {
 */
 
 
+/*function deleteUsuario(req, res) {
+    var userId = req.params.id;
+    User.findOne({ where: { idUsuario: userId } })
+        .then(user => {
+            User.findByPk(userId)
+                .then(user => {
+                    user.destroy();
+                    res.status(200).json({ message: 'Usuario Eliminado...!' });
+                })
+                .catch(err => {
+                    res.status(404).json({ message: 'Usuario No Existe...!' });
+                });
+        })
+};*/
+
 
 
 module.exports = {
@@ -189,5 +236,6 @@ module.exports = {
     deleteUsuario,
     getUserClientes,
     getUserAbogados,
-    getUserADMIN
+    getUserADMIN,
+    getPersona
 };

@@ -3,19 +3,18 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 var secret = 'xapmSJPDnDcDa7.@';
 
-exports.createToken = function(persona){
+exports.createToken = function(user){
     var payload = {
-        sub: persona._idUsuario,
-        name: persona.nombres_PERSONA,
-        apellido: persona.p_Apellido_PERSONA,
-        sapellido: persona.s_Apellido_PERSONA,
-        correo: persona.correo_USUARIO,
-        tipo_usuario: persona.tipo_usuario,
-        estado: user.estado_Usuario_PERSONA,
-        imagen: user.imagen_PERSONA,
+        sub: user.idUsuario,
+        name: user.nombre_USUARIO,
+        apellido: user.p_Apellido_USUARIO,
+        sapellido: user.s_Apellido_USUARIO,
+        correo: user.correo_USUARIO,
+        tipo_usuario: user.tipo_USUARIO,
+        estado: user.estado_USUARIO,
+        imagen: user.imagen_USUARIO,
         iat: moment().unix(),
         exp: moment().add(1,'days').unix
-
-
     };
+    return jwt.encode(payload, secret);
 }
