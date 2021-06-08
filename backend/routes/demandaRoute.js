@@ -6,7 +6,7 @@ var md_auth = require('../services/authenticated');
 var DemandaController = require('../controllers/demandaController');
 //SHA-256
 
-api.post('/e20f8f581747bb25fa5df1667edd0dc47fb7dfbb28263556846cbea1d13a6fed', md_auth.ensureAuth,  DemandaController.saveDemanda);
+api.post('/e20f8f581747bb25fa5df1667edd0dc47fb7dfbb28263556846cbea1d13a6fed', md_auth.ensureAuth, DemandaController.saveDemanda);
 api.put('/eb6ba149e636dade12e394db69c412a6993749a7fd97cf2b5c15d2a4717e6183/:id', md_auth.ensureAuth, DemandaController.updateDemanda);
 api.get('/4658f0073a07acb51f9f155f77916b078b8246a02d54c756f2f27adef51d150e', md_auth.ensureAuth, DemandaController.listDemanda);
 api.get('/f3a62fe5b26aa0b94bb4d9ece7bf45b0047ced2a1d11d605c290493a6444663b', md_auth.ensureAuth, DemandaController.listDemandaEstadoActivo);
