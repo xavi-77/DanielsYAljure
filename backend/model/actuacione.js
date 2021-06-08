@@ -1,8 +1,8 @@
 'use strict'
 const Sequelize = require('sequelize');
-const db = require('../db/database');
+const db = require('../database/db');
 
-module.exports = db.Sequelize.define(
+module.exports = db.sequelize.define(
     'actuaciones',{
         idActuaciones: {
             type:
@@ -43,5 +43,7 @@ module.exports = db.Sequelize.define(
             type:
                 Sequelize.STRING
         }
+    },{
+        timestamps: false
     }
 );

@@ -8,3 +8,6 @@ node_modules/
 *.jpeg
 *.png
 *.gif
+*.txt
+*.pdf
+*.docx

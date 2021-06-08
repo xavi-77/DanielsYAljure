@@ -24,7 +24,7 @@ function saveActuacion(req, res) {
     }).then(actuacion => {
         console.log(actuacion);
         if (!actuacion) {
-            Demanda.create(ActuacionData)
+            Actuacion.create(ActuacionData)
                 .then(actuacion => {
                     res.json({ success: 'Actuación Regitrada Satisfactoriamente...!' });
                 })
@@ -42,7 +42,7 @@ function saveActuacion(req, res) {
 
 function updateActuacion(req, res) {
     var actuacionId = req.params.id;
-    Demanda.findOne({
+    Actuacion.findOne({
 
         where: { idActuaciones: actuacionId }
 
