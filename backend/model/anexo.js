@@ -37,7 +37,8 @@ module.exports = db.sequelize.define(
         },
         id_Demanda_ANEXO: {
             type:
-                Sequelize.INTEGER
+                Sequelize.INTEGER,
+                primaryKey: true
         }
     },{
         timestamps: false

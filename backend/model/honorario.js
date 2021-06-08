@@ -1,8 +1,8 @@
 'use strict'
 const Sequelize = require('sequelize');
-const db = require('../db/database');
+const db = require('../database/db');
 
-module.exports = db.Sequelize.define(
+module.exports = db.sequelize.define(
     'honorarios',{
         idHonorarios: {
             type:
@@ -12,15 +12,22 @@ module.exports = db.Sequelize.define(
         },
         id_Demanda_HONORARIO: {
             type:
-                Sequelize.INTEGER
+                Sequelize.INTEGER,
+                primaryKey: true
         },
         id_Abogado_HONORARIO: {
             type:
-                Sequelize.INTEGER
+                Sequelize.INTEGER,
+                primaryKey: true
         },
         id_Cliente_HONORARIO: {
             type:
-                Sequelize.INTEGER
+                Sequelize.INTEGER,
+                primaryKey: true
+        },
+        concepto_HONORARIO: {
+            type:
+                Sequelize.STRING
         },
         total_HONORARIO: {
             type:
@@ -43,5 +50,7 @@ module.exports = db.Sequelize.define(
             type:
                 Sequelize.DATE
         }
+    },{
+        timestamps: false
     }
 );
