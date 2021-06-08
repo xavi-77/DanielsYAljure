@@ -8,24 +8,25 @@ var dbat = require('../database/db');
 function saveDemanda(req, res) {
     const today = new Date();
     const DemandaData = {
-        tipo_DEMANDA: req.body.tipo,
-        fecha_DEMANDA: req.body.fecha,
-        especialida_DEMANDA: req.body.especialida,
-        radicado_DEMANDA: req.body.radicado,
-        juzgado_Origen_DEMANDA: req.body.juzgado_Origen,
-        juzgado_Ejecucion_DEMANDA: req.body.juzgado_Ejecucion,
-        id_Abogado_DEMANDA: req.body.id_Abogado,
-        id_Cliente_DEMANDA: req.body.id_Cliente,
+        tipo_DEMANDA: req.body.tipo_DEMANDA,
+        fecha_DEMANDA: req.body.fecha_DEMANDA,
+        especialida_DEMANDA: req.body.especialida_DEMANDA,
+        radicado_DEMANDA: req.body.radicado_DEMANDA,
+        juzgado_Origen_DEMANDA: req.body.juzgado_Origen_DEMANDA,
+        juzgado_Ejecucion_DEMANDA: req.body.juzgado_Ejecucion_DEMANDA,
+        id_Abogado_DEMANDA: req.body.id_Abogado_DEMANDA,
+        id_Cliente_DEMANDA: req.body.id_Cliente_DEMANDA,
         fecha_Creado_DEMANDA: today,
-        estado_DEMANDA: req.body.estado
+        estado_DEMANDA: req.body.estado_DEMANDA
     }
+    console.log(DemandaData);
     Demanda.findOne({
         where: {
             radicado_DEMANDA: req.body.radicado
         }
     }).then(demand => {
         if (!demand) {
-            Persona.create(DemandaData)
+            Demanda.create(DemandaData)
                 .then(demandita => {
                     res.json({ success: 'Demanda Regitrada Satisfactoriamente...!' });
                 })
