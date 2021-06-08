@@ -3,7 +3,6 @@ var express = require('express');
 var cors = require('cors');
 const db = require('./database/db');
 var port = process.env.PORT || 3000;
-const multer = require('multer');
 
 
 var app = express();
@@ -16,6 +15,7 @@ var persona_routes = require('./routes/personaRoute');
 var usuaro_routes = require('./routes/usuarioRoute');
 var demanda_routes = require('./routes/demandaRoute');
 var actuacion_routes = require('./routes/actuacionRoute');
+var anexo_routes = require('./routes/anexoRoute');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -35,6 +35,7 @@ app.use('/Daniels&Aljure', persona_routes);
 app.use('/Daniels&Aljure', usuaro_routes);
 app.use('/Daniels&Aljure', demanda_routes);
 app.use('/Daniels&Aljure', actuacion_routes);
+app.use('/Daniels&Aljure', anexo_routes);
 
 app.listen(port, function () {
     console.log('Servidor Corriendo en el Puerto #' + port);

@@ -1,8 +1,8 @@
 'use strict'
 const Sequelize = require('sequelize');
-const db = require('../db/database');
+const db = require('../database/db');
 
-module.exports = db.Sequelize.define(
+module.exports = db.sequelize.define(
     'anexos',{
         idAnexo: {
             type:
@@ -16,7 +16,7 @@ module.exports = db.Sequelize.define(
         },
         nombre_Documento_ANEXO: {
             type:
-                Sequelize.DATE
+                Sequelize.STRING
         },
         fecha_Creado_ANEXO: {
             type:
@@ -39,5 +39,7 @@ module.exports = db.Sequelize.define(
             type:
                 Sequelize.INTEGER
         }
+    },{
+        timestamps: false
     }
 );
