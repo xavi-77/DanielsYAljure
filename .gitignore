@@ -4,3 +4,4 @@ node_modules/
 !src/node_modules/
 /node_modules/*/node-modules/ 
 /uploads/*
+printf '*.jpg\n*.jpeg\n*.png\n*.gif\n' >> .gitignore
