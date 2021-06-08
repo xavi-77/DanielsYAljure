@@ -17,6 +17,7 @@ var demanda_routes = require('./routes/demandaRoute');
 var actuacion_routes = require('./routes/actuacionRoute');
 var anexo_routes = require('./routes/anexoRoute');
 var honorario_routes = require('./routes/honorarioRoute');
+var gastosAdicionales_routes = require('./routes/gastosAdicionalesRoute');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -38,6 +39,7 @@ app.use('/Daniels&Aljure', demanda_routes);
 app.use('/Daniels&Aljure', actuacion_routes);
 app.use('/Daniels&Aljure', anexo_routes);
 app.use('/Daniels&Aljure', honorario_routes);
+app.use('/Daniels&Aljure', gastosAdicionales_routes);
 
 app.listen(port, function () {
     console.log('Servidor Corriendo en el Puerto #' + port);
