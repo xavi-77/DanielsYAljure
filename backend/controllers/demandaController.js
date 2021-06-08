@@ -6,7 +6,9 @@ var User = require('../model/usuario');
 var dbat = require('../database/db');
 
 function saveDemanda(req, res) {
+    console.log('Puta');
     const today = new Date();
+    console.log('Puta2');
     const DemandaData = {
         tipo_DEMANDA: req.body.tipo_DEMANDA,
         fecha_DEMANDA: req.body.fecha_DEMANDA,
@@ -22,9 +24,10 @@ function saveDemanda(req, res) {
     console.log(DemandaData);
     Demanda.findOne({
         where: {
-            radicado_DEMANDA: req.body.radicado
+            radicado_DEMANDA: req.body.radicado_DEMANDA
         }
     }).then(demand => {
+        console.log(demand);
         if (!demand) {
             Demanda.create(DemandaData)
                 .then(demandita => {
@@ -35,7 +38,7 @@ function saveDemanda(req, res) {
                 })
 
         } else {
-            res.json({ error: 'La Persona que intenta registrar con ese numero de Cédula de Ciudadanía ya Existe...!' });
+            res.json({ error: 'La Demanda que intenta registrar con ese numero de Radicado ya Existe...!' });
         }
     }).catch(err => {
         res.send('error: ' + err);
@@ -51,16 +54,16 @@ function updateDemanda(req, res) {
     }).then(demandita => {
         const today = new Date();
         Demanda.update({
-            tipo_DEMANDA: req.body.tipo,
-            fecha_DEMANDA: req.body.fecha,
-            especialida_DEMANDA: req.body.especialida,
-            radicado_DEMANDA: req.body.radicado,
-            juzgado_Origen_DEMANDA: req.body.juzgado_Origen,
-            juzgado_Ejecucion_DEMANDA: req.body.juzgado_Ejecucion,
-            id_Abogado_DEMANDA: req.body.id_Abogado,
-            id_Cliente_DEMANDA: req.body.id_Cliente,
+            tipo_DEMANDA: req.body.tipo_DEMANDA,
+            fecha_DEMANDA: req.body.fecha_DEMANDA,
+            especialida_DEMANDA: req.body.especialida_DEMANDA,
+            radicado_DEMANDA: req.body.radicado_DEMANDA,
+            juzgado_Origen_DEMANDA: req.body.juzgado_Origen_DEMANDA,
+            juzgado_Ejecucion_DEMANDA: req.body.juzgado_Ejecucion_DEMANDA,
+            id_Abogado_DEMANDA: req.body.id_Abogado_DEMANDA,
+            id_Cliente_DEMANDA: req.body.id_Cliente_DEMANDA,
             fecha_Modificado_DEMANDA: today,
-            estado_DEMANDA: req.body.estado
+            estado_DEMANDA: req.body.estado_DEMANDA
         }, { where: { idDemandas: demandaId } })
             .then(nuevaDemanda => {
                 res.json(nuevaDemanda)
@@ -128,8 +131,8 @@ function listarDemandaId(req, res) {
 };
 
 function listarDemandaRadicado(req, res) {
-    var radicado = req.body.radicado;
-    Demanda.find({ where: { radicado_DEMANDA: radicado } })
+    var radicado_DEMANDA = req.body.radicado_DEMANDA;
+    Demanda.findOne({ where: { radicado_DEMANDA: radicado_DEMANDA } })
         .then(demandita => {
             res.send(demandita)
         })

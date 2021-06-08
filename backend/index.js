@@ -14,6 +14,7 @@ app.set(app.set(port));
 //Cargar Rutas
 var persona_routes = require('./routes/personaRoute');
 var usuaro_routes = require('./routes/usuarioRoute');
+var demanda_routes = require('./routes/demandaRoute');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 // Rutas Bases
 app.use('/Daniels&Aljure', persona_routes);
 app.use('/Daniels&Aljure', usuaro_routes);
+app.use('/Daniels&Aljure', demanda_routes);
 
 app.listen(port, function () {
     console.log('Servidor Corriendo en el Puerto #' + port);

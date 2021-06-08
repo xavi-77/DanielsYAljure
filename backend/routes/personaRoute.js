@@ -8,7 +8,7 @@ var PersonaController = require('../controllers/personaController');
 var md_upload = multipart({uploadDir: './uploads/person'});
 //SHA-256
 
-api.post('/1c666231894daf6f8fe18f1b1b5f2d82fa67b8f194ec73139ce51e09e786b126',  PersonaController.savePerson);
+api.post('/1c666231894daf6f8fe18f1b1b5f2d82fa67b8f194ec73139ce51e09e786b126', md_auth.ensureAuth, PersonaController.savePerson);
 api.put('/0cbbcf507cfc6b6c2db5a6babd0347dc723df6807bc56b8cf35df35ccd179faf/:id', md_auth.ensureAuth, PersonaController.updatePerson);
 api.post('/693dd2f438b22e2c2cdfd356bd04ce3111acd176f77f2dda964f1bba0d532260/:id', [md_auth.ensureAuth, md_upload], PersonaController.uploadImage);
 api.get('/4127c5991d0e8a0e719c4156eb0b49be7f480082d8f4a1b384dc828176231e56/:imageFile', PersonaController.getImageFile);
