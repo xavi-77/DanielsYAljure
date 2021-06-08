@@ -6,9 +6,7 @@ var User = require('../model/usuario');
 var dbat = require('../database/db');
 
 function saveDemanda(req, res) {
-    console.log('Puta');
     const today = new Date();
-    console.log('Puta2');
     const DemandaData = {
         tipo_DEMANDA: req.body.tipo_DEMANDA,
         fecha_DEMANDA: req.body.fecha_DEMANDA,
