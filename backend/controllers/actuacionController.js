@@ -16,7 +16,6 @@ function saveActuacion(req, res) {
         estado_ACTUACION: req.body.estado_ACTUACION,
         archivo_ACTUACION: req.body.archivo_ACTUACION
     }
-    console.log(ActuacionData);
     Actuacion.findOne({
         where: {
             id_Demanda_ACTUACION: 0
