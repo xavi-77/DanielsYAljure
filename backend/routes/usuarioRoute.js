@@ -17,6 +17,6 @@ api.get('/0e6234fdd77076b933b3317b959949c2993e21da42968cf852eaf522db975e8a', md_
 api.get('/4bcd640d3629a4ca1e0d76bc5f893e71ebe8944fbfec155ddf47a495e5ce308c', md_auth.ensureAuth, UsuarioController.getUserAbogados);
 api.get('/0d106aad430fdbf045df11a0e51114ba929eebfaafe5c0c1cf1e1e3d214a0fe8', md_auth.ensureAuth, UsuarioController.getUserClientes);
 api.get('/eae2a704deed452eab059a2c15947336a2a67408949431f524e895ec796d84ef', md_auth.ensureAuth, UsuarioController.getUserADMIN);
-api.get('/4127c5991d0e8a0e719c4156eb0b49be7f480082d8f4a1b384dc828176231e56/:imageFile', UsuarioController.getImageFile);
+api.get('/036368441d3a87c00980486b33b06d200219207c4f5fa28634eb3812d214e2ce/:imageFile', UsuarioController.getImageFile);
 
 module.exports = api;

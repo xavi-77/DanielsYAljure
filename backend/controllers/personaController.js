@@ -173,16 +173,14 @@ function uploadImage(req, res) {
 function getImageFile(req, res) {
     var imageFile = req.params.imageFile;
     var path_file = './uploads/person/' + imageFile;
-    
-    fs.stat(path_file, function (stat) {
-        console.log(stat);
-        console.log(path_file);
-        if (stat) {
-            res.sendFile(path.resolve(path_file));
-        } else {
-            res.status(200).send({ message: 'No Existe La Imagen...!' });
-        }
-    })
+    var ruta_enc = fs.existsSync(path_file);
+
+    if (ruta_enc) {
+        res.sendFile(path.resolve(path_file));
+    } else {
+        res.status(200).send({ message: 'No Existe La Imagen...!' });
+    }
+
 };
 
 function getAbogado(req, res) {

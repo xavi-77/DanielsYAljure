@@ -199,18 +199,16 @@ function uploadImage(req, res) {
 };
 
 
-
-
 function getImageFile(req, res) {
     var imageFile = req.params.imageFile;
-    var path_file = './uploads/user/' + imageFile;
-    fs.stat(path_file, function (stat) {
-        if (stat) {
-            res.sendFile(path.resolve(path_file));
-        } else {
-            res.status(200).send({ message: 'No Existe La Imagen...!' });
-        }
-    })
+    var path_file = './uploads/usuar/' + imageFile;
+    var ruta_enc = fs.existsSync(path_file);
+    if (ruta_enc) {
+        res.sendFile(path.resolve(path_file));
+    } else {
+        res.status(200).send({ message: 'No Existe La Imagen...!' });
+    }
+
 };
 
 /*function deleteUsuario(req, res) {
