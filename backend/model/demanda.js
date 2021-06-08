@@ -36,11 +36,13 @@ module.exports = db.Sequelize.define(
         },
         id_Abogado_DEMANDA: {
             type:
-                Sequelize.INTEGER
+                Sequelize.INTEGER,
+                primaryKey: true  
         },
         id_Cliente_DEMANDA: {
             type:
-                Sequelize.INTEGER
+                Sequelize.INTEGER,
+                primaryKey: true  
         },
         fecha_Creado_DEMANDA: {
             type:
