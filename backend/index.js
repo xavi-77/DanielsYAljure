@@ -3,12 +3,19 @@ var express = require('express');
 var cors = require('cors');
 const db = require('./database/db');
 var port = process.env.PORT || 3000;
+const multer = require('multer');
+
 
 var app = express();
 
 app.use(cors());
 app.set(app.set(port));
-app.use(express.urlencoded({ extended: false }));
+
+//Cargar Rutas
+var persona_routes = require('./routes/personaRoute');
+var usuaro_routes = require('./routes/usuarioRoute');
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Configurar Cabeceras HTTP
@@ -20,9 +27,6 @@ app.use((req, res, next) => {
     
     next();
  });
-//Cargar Rutas
-var persona_routes = require('./routes/personaRoute');
-var usuaro_routes = require('./routes/usuarioRoute');
 
 // Rutas Bases
 app.use('/Daniels&Aljure', persona_routes);

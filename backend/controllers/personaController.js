@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var Persona = require('../model/persona');
+var User = require('../model/usuario');
 var dbat = require('../database/db');
 
 function savePerson(req, res) {
@@ -83,14 +84,34 @@ function updatePerson(req, res) {
 
 function deletePerson(req, res) {
     var personaId = req.params.id;
-    Persona.findByPk(personaId)
-        .then(persona => {
-            Persona.destroy();
-            res.status(200).json({ message: 'Persona Eliminada...!' });
+    var useridd = req.body.iduser;
+    var codigo = req.body.codigo;
+    const today = new Date();
+    User.findOne({ where: { idUsuario: useridd, codigo_Seguridad_USUARIO: codigo } })
+        .then(user => {
+            if (user) {
+                Persona.findOne({ where: { idPersonas: personaId } })
+                    .then(persona => {
+                        if (persona) {
+                            Persona.update({
+                                estado_Usuario_PERSONA: 'ELIMINADO',
+                                fecha_Eliminado_PERSONA: today
+                            }, {
+                                where: { idPersonas: personaId }
+
+                            }).then(nuevoUsuario => {
+                                res.status(200).json({ message: 'Persona Eliminada...!' });
+                            })
+                        } else {
+                            res.status(404).json({ message: 'Hubo un error no se encontro a la persona...!' });
+                        }
+
+                    })
+            } else {
+                res.status(404).json({ message: 'Su código de verificación no es válido...!' });
+            }
+
         })
-        .catch(err => {
-            res.status(404).json({ message: 'Persona  No Existe...!' });
-        });
 };
 
 
@@ -152,7 +173,10 @@ function uploadImage(req, res) {
 function getImageFile(req, res) {
     var imageFile = req.params.imageFile;
     var path_file = './uploads/person/' + imageFile;
+    
     fs.stat(path_file, function (stat) {
+        console.log(stat);
+        console.log(path_file);
         if (stat) {
             res.sendFile(path.resolve(path_file));
         } else {
@@ -182,6 +206,21 @@ function getCliente(req, res) {
         res.send(clientecitos)
     })
 };
+
+
+/*function deletePerson(req, res) {
+    var personaId = req.params.id;
+    Persona.findByPk(personaId)
+        .then(persona => {
+            Persona.destroy();
+            res.status(200).json({ message: 'Persona Eliminada...!' });
+        })
+        .catch(err => {
+            res.status(404).json({ message: 'Persona  No Existe...!' });
+        });
+};
+*/
+
 
 module.exports = {
     savePerson,

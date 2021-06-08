@@ -6,6 +6,7 @@ const jwt = require('../services/jwt');
 var dbat = require('../database/db');
 const saltRounds = 12;
 
+
 function saveUsuario(req, res) {
 
     const today = new Date();
@@ -51,7 +52,7 @@ function login(req, res) {
         }
     })
         .then(user => {
-            if(user){
+            if (user) {
                 bcrypt.compare(req.body.contra_USUARIO, user.contra_USUARIO, function (err, result) {
                     if (result) {
                         if (req.body.gethash) {
@@ -65,7 +66,7 @@ function login(req, res) {
                         res.status(404).send({ message: 'La cuenta o la contraseña es incorrecta. Si no recuerdas la cuenta o la contraseña pida ayuda al administrador!' });
                     }
                 });
-            }else{
+            } else {
                 res.status(404).send({ message: 'La cuenta esta desactivada...!' });
             }
 
@@ -120,7 +121,7 @@ function deleteUsuario(req, res) {
                 }).then(nuevoUsuario => {
                     res.status(200).json({ message: 'Usuario Eliminado...!' });
                 })
-            }else{
+            } else {
                 res.status(404).json({ message: 'Su código de verificación no es válido...!' });
             }
 
@@ -171,10 +172,10 @@ function getUserADMIN(req, res) {
     })
 };
 
-/*function uploadImage(req, res) {
+function uploadImage(req, res) {
     var userId = req.params.id;
     var file_name = 'No Subido...!';
-
+    
     if (req.files) {
         var file_path = req.files.image.path;
         var file_split = file_path.split('\\');
@@ -184,8 +185,8 @@ function getUserADMIN(req, res) {
         var file_ext = ext_split[1];
         if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'PNG' || file_ext == 'JPG' || file_ext == 'GIF') {
             User.update({
-                imagen: file_name
-            }, { where: { idUsuario: userId } })
+                imagen_USUARIO: file_name
+            }, { where: { idUsuario : userId } })
                 .then(nuevoUsuario => {
                     res.json(nuevoUsuario)
                 })
@@ -197,19 +198,20 @@ function getUserADMIN(req, res) {
     }
 };
 
+
+
+
 function getImageFile(req, res) {
     var imageFile = req.params.imageFile;
-    var path_file = './uploads/users/' + imageFile;
-    fs.exists(path_file, function (exists) {
-        if (exists) {
+    var path_file = './uploads/user/' + imageFile;
+    fs.stat(path_file, function (stat) {
+        if (stat) {
             res.sendFile(path.resolve(path_file));
         } else {
             res.status(200).send({ message: 'No Existe La Imagen...!' });
         }
     })
 };
-*/
-
 
 /*function deleteUsuario(req, res) {
     var userId = req.params.id;
@@ -224,10 +226,8 @@ function getImageFile(req, res) {
                     res.status(404).json({ message: 'Usuario No Existe...!' });
                 });
         })
-};*/
-
-
-
+};
+*/
 module.exports = {
     saveUsuario,
     login,
@@ -237,5 +237,8 @@ module.exports = {
     getUserClientes,
     getUserAbogados,
     getUserADMIN,
-    getPersona
+    getPersona,
+    uploadImage,
+    getImageFile
+
 };
