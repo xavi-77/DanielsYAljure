@@ -49,6 +49,10 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
 
+import { AuthGuard } from './services/auth.Guard';
+import { AuthService } from './services/auth.service';
+import { UserServiceLogin } from './services/service.login';
+
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -107,7 +111,10 @@ export class MaterialModule {}
         AuthLayoutComponent
     ],
     providers : [
-      MatNativeDateModule
+      MatNativeDateModule,
+      AuthGuard, 
+      AuthService,
+      UserServiceLogin
     ],
     bootstrap:    [ AppComponent ]
 })
