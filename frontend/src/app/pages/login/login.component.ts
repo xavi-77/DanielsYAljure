@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log(this.user);
         this._userServiceLogin.loginUp(this.user).subscribe(
             response => {
-                let identity = response.user;
+                let identity = response['user'];
                 console.log('hola');
                 console.log(identity);
                 this.identity = identity;
@@ -131,14 +131,14 @@ export class LoginComponent implements OnInit, OnDestroy {
                     //Conseguir el token para enviarlo en cada peticion.
                     this._userServiceLogin.loginUp(this.user, 'true').subscribe(
                         response => {
-                            let token = response.token;
+                            let token = response['token'];
                             this.token = token;
                             console.log(this.token);
                             if (this.token.length <= 0) {
                                 $.notify({
                                     icon: 'warning',
                                     //Error de la Generar Token
-                                    message: 'La Clave De Encryptacion Interna no se ha generado correctamente, contacte al administrador.!'
+                                    message: 'La Clave De Encryotacion Interna no se ha generado correctamente, contacte al administrador.!'
                                 }, {
                                     type: 'warning',
                                     timer: 3000,

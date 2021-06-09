@@ -22,19 +22,28 @@ export class UserServiceLogin {
 
 		let json = JSON.stringify(user_to_login);
 		let params = json;
-		
-
-		let headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+		let headers = new HttpHeaders({
+			'Content-Type': 'application/json'
+		 });
+		 let options = {
+			headers: headers
+		 }
+        return this.http.post(this.url+'login', params, {headers: headers}).map(res => res );
+		//let headers = new Headers({ 'Content-Type': 'application/json' })
 		//return this._http.post(this.url + 'login', params, { headers: headers }).map(res => res.json());
+
+
+		//return this.http.post(this.url + 'login',  params, { headers: headers }).map(response => response.json());
+
+
+		//post(url: string, body: any, options: { headers?: HttpHeaders | { [header: string]: string | string[]; }; observe?: "body"; params?: HttpParams | { [param: string]: string | string[]; }; reportProgress?: boolean; responseType: "arraybuffer"; withCredentials?: boolean; }): Observable<ArrayBuffer>
+
 		
-
-
-		return this.http.post(this.url + 'login',  params, { headers: headers }).map(response => response.json());
 
 	}
 
 	getIdentity() {
-		let identity = JSON.parse(localStorage.getItem('identity'));
+		let identity =localStorage.getItem('identity');
 
 		if (identity != "undefined") {
 			this.identity = identity;
