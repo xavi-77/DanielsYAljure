@@ -226,6 +226,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     navigate() {
         this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/dashboard');
     }
     logout() {
         localStorage.removeItem('identity');

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 .wrapper{
     position: relative;
     top: 0;
@@ -293,6 +294,7 @@
             font-size: 18px;
             color: $black-color;
             white-space: nowrap;
+            font-family: 'Time Roman Italic', cursive,italic;
             font-weight: $font-weight-default;
             line-height: 30px;
             overflow: hidden;

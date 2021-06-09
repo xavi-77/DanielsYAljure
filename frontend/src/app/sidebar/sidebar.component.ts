@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { UserServiceLogin } from '../services/service.login';
+import { User } from '../models/user';
+
 
 declare const $: any;
 
@@ -115,6 +118,14 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    public identity;
+    public user: User;
+    public nombre;
+    public apellido;
+    public apellido1;
+    public apellido2;
+    public token;
+    public imagen;
     ps: any;
     isMobileMenu() {
         if ($(window).width() > 991) {
@@ -129,6 +140,13 @@ export class SidebarComponent implements OnInit {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
             this.ps = new PerfectScrollbar(elemSidebar);
         }
+
+        var identityaa = JSON.parse(localStorage.getItem("identity"));
+        console.log(identityaa);
+        this.nombre = identityaa.nombre_USUARIO;
+        this.apellido = identityaa.p_Apellido_USUARIO;
+        this.apellido1 = identityaa.s_Apellido_USUARIO;
+        this.imagen = identityaa.imagen_USUARIO;
     }
     updatePS(): void  {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
@@ -141,5 +159,13 @@ export class SidebarComponent implements OnInit {
             bool = true;
         }
         return bool;
+    }
+
+    logout(){
+        localStorage.removeItem('identity');
+        localStorage.removeItem('token');
+        localStorage.clear();
+        this.token = null;
+        this.identity = null;
     }
 }
