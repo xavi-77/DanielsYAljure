@@ -5,7 +5,7 @@ var UsuarioController = require('../controllers/usuarioController');
 var api = express.Router();
 var md_auth = require('../services/authenticated');
 var multipart = require('connect-multiparty');
-var md_upload = multipart({uploadDir: './uploads/user'});
+var md_upload = multipart({uploadDir: './uploads/usuar'});
 //SHA-256
 
 api.post('/ba4ccdb3f54ad92c2a8287f0c29baceeb2cf1e53985af132b287b181e7f3c1bb', UsuarioController.saveUsuario);
