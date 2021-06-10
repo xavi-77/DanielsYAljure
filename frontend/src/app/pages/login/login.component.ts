@@ -98,8 +98,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this._userServiceLogin.loginUp(this.user).subscribe(
             response => {
                 let identity = response['user'];
-                console.log('hola');
-                console.log(identity);
                 this.identity = identity;
 
                 if (identity==null) {
@@ -133,7 +131,6 @@ export class LoginComponent implements OnInit, OnDestroy {
                         response => {
                             let token = response['token'];
                             this.token = token;
-                            console.log(this.token);
                             if (this.token.length <= 0) {
                                 $.notify({
                                     icon: 'warning',
@@ -196,7 +193,6 @@ export class LoginComponent implements OnInit, OnDestroy {
                 var errorSubmita = <any>error;
                 if (errorSubmita != null) {
                     var body = JSON.parse(error._body);
-                    console.log(error._body);
                     var errorSubmita = body.message;
                     $.notify({
                         icon: 'warning',
@@ -226,8 +222,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     navigate() {
         this.router.navigateByUrl('/dashboard');
-        this.router.navigateByUrl('/dashboard');
     }
+
     logout() {
         localStorage.removeItem('identity');
         localStorage.removeItem('token');

@@ -126,6 +126,7 @@ export class SidebarComponent implements OnInit {
     public apellido2;
     public token;
     public imagen;
+    public global;
     ps: any;
     isMobileMenu() {
         if ($(window).width() > 991) {
@@ -140,7 +141,7 @@ export class SidebarComponent implements OnInit {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
             this.ps = new PerfectScrollbar(elemSidebar);
         }
-
+        this.global = 'http://localhost:3000/Daniels&Aljure/036368441d3a87c00980486b33b06d200219207c4f5fa28634eb3812d214e2ce'
         var identityaa = JSON.parse(localStorage.getItem("identity"));
         console.log(identityaa);
         this.nombre = identityaa.nombre_USUARIO;
@@ -148,11 +149,13 @@ export class SidebarComponent implements OnInit {
         this.apellido1 = identityaa.s_Apellido_USUARIO;
         this.imagen = identityaa.imagen_USUARIO;
     }
+
     updatePS(): void  {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             this.ps.update();
         }
     }
+
     isMac(): boolean {
         let bool = false;
         if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
