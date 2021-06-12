@@ -5698,6 +5698,33 @@ h2.title {
   background: #d50000;
   opacity: .8;
 }
+
+.sidebar[data-background-color="caramelo"] {
+  background-color: #a0522d;
+}
+.sidebar[data-background-color="caramelo"] .nav li > a {
+  color: #FFFFFF;
+}
+.sidebar[data-background-color="caramelo"] .nav li i {
+  color: rgba(255, 255, 255, 0.8);
+}
+.sidebar[data-background-color="caramelo"] .nav li.active > [data-toggle="collapse"], .sidebar[data-background-color="red"] .nav li:hover > [data-toggle="collapse"] {
+  color: #FFFFFF;
+}
+.sidebar[data-background-color="caramelo"] .nav li.active > [data-toggle="collapse"] i, .sidebar[data-background-color="red"] .nav li:hover > [data-toggle="collapse"] i {
+  color: rgba(255, 255, 255, 0.8);
+}
+.sidebar[data-background-color="caramelo"] .user a {
+  color: #FFFFFF;
+}
+.sidebar[data-background-color="caramelo"] .simple-text {
+  color: #FFFFFF;
+}
+.sidebar[data-background-color="caramelo"] .sidebar-background:after {
+  background: #804224;
+  opacity: .8;
+}
+
 .sidebar[data-background-color="red"] .user:after,
 .sidebar[data-background-color="red"] .logo:after,
 .sidebar[data-background-color="red"] .nav li.separator:after {
@@ -5707,6 +5734,16 @@ h2.title {
 .sidebar[data-background-color="red"] .nav li.active > [data-toggle="collapse"] {
   background-color: rgba(255, 255, 255, 0.1);
 }
+.sidebar[data-background-color="caramelo"] .user:after,
+.sidebar[data-background-color="caramelo"] .logo:after,
+.sidebar[data-background-color="caramelo"] .nav li.separator:after {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.sidebar[data-background-color="caramelo"] .nav li:hover:not(.active) > a,
+.sidebar[data-background-color="caramelo"] .nav li.active > [data-toggle="collapse"] {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .sidebar[data-active-color="purple"] li.active > a {
   background-color: #9c27b0;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);

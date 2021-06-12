@@ -47,6 +47,10 @@
         background-color: #e53935;
     }
 
+    &[data-background-color="caramelo"]{
+        background-color: $caramelo-sieena;
+    }
+
     .sidebar-wrapper{
         position: relative;
         height: calc(100vh - 75px);
