@@ -33,6 +33,16 @@
     border-color: transparent;
   }
 
+  .input-group-text2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px 0 15px;
+    color:$caramelo-sieena;
+    background-color: transparent;
+    border-color: transparent;
+  }
+
 }
 .form-control:focus{
   box-shadow: none;

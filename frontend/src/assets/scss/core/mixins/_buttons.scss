@@ -118,6 +118,9 @@
   &.btn-success {
     @include bmd-flat-button-variant($btn-success-bg);
   }
+  &.btn-loginp {
+    @include bmd-flat-button-variant($btn-loginp-bg);
+  }
   &.btn-warning {
     @include bmd-flat-button-variant($btn-warning-bg);
   }
@@ -154,6 +157,9 @@
   }
   &.btn-outline-success {
     @include bmd-flat-button-variant($btn-success-bg, $btn-success-bg, $btn-success-bg, $btn-success-bg);
+  }
+  &.btn-outline-loginp {
+    @include bmd-flat-button-variant($btn-loginp-bg, $btn-loginp-bg, $btn-loginp-bg, $btn-loginp-bg);
   }
   &.btn-outline-warning {
     @include bmd-flat-button-variant($btn-warning-bg, $btn-warning-bg, $btn-warning-bg, $btn-warning-bg);
@@ -221,6 +227,9 @@
   }
   &.btn-success {
     @include bmd-raised-button-variant($btn-success-color, $btn-success-bg, $btn-success-border-color);
+  }
+  &.btn-loginp {
+    @include bmd-raised-button-variant($btn-loginp-color, $btn-loginp-bg, $btn-loginp-border-color);
   }
   &.btn-warning {
     @include bmd-raised-button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border-color);

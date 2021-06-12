@@ -172,6 +172,15 @@
   }
 }
 
+.card .login-Marron .card-icon,
+.card .login-Marron .card-text, 
+.card .login-Marron:not(.card-header-icon):not(.card-header-text),
+.card.bg-success,
+.card.card-rotate.bg-success .front,
+.card.card-rotate.bg-success .back{
+    background: linear-gradient(60deg, $brown-400, $brown-600);
+}
+
 .lock-page {
 
     .card-profile {
