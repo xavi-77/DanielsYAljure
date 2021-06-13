@@ -48,7 +48,7 @@
     }
 
     &[data-background-color="caramelo"]{
-        background-color: $caramelo-sieena;
+        background-color: #a0522d;
     }
 
     .sidebar-wrapper{
@@ -393,6 +393,13 @@
           color: $white-color;
         }
     }
+    &[data-background-color="caramelo"]{
+        @include sidebar-background-color($gray-base, $white-color);
+
+        .nav li .dropdown-menu .dropdown-item{
+          color: $white-color;
+        }
+    }
 
     &[data-color="purple"]{
         @include set-background-color-button($brand-primary);
@@ -411,6 +418,13 @@
     }
     &[data-color="rose"]{
         @include set-background-color-button($brand-rose);
+    }
+    &[data-color="darking"]{
+        @include set-background-color-button($brand-darking);
+    }
+
+    &[data-color="caramelo"]{
+        @include set-background-color-button($caramelo-sieena);
     }
 
     &[data-color="white"]{
@@ -440,6 +454,25 @@
     &[data-image]:after,
     &.has-image:after{
         opacity: .77;
+    }
+
+    &[data-background-color="caramelo"]{
+        @include sidebar-background-color($caramelo-sieena, $white-color);
+
+        .user,
+        .logo,
+        .nav li.separator{
+            &:after{
+                background-color: rgba(255,255,255, .3);
+            }
+        }
+
+        .nav{
+            li:hover:not(.active) > a,
+            li.active > [data-toggle="collapse"]{
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }
     }
 }
 
