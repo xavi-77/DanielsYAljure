@@ -3,6 +3,7 @@
     position: relative;
     top: 0;
     height: 100vh;
+    background-image: url('../../img/login12.png');
 }
 
 .sidebar {
@@ -426,6 +427,10 @@
     &[data-color="caramelo"]{
         @include set-background-color-button($caramelo-sieena);
     }
+    &[data-color="beige"]{
+        @include set-background-color-button($beige-claro);
+        @include sidebar-active-color($black-color);
+    }
 
     &[data-color="white"]{
         @include set-background-color-button($white-color);
@@ -497,7 +502,7 @@
     float: right;
     width: $sidebar-width;
     @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
-
+    
     .main-content{
         margin-top: 70px;
         padding: 30px 15px;

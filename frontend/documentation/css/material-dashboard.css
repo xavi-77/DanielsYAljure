@@ -5367,6 +5367,7 @@ h2.title {
   position: relative;
   top: 0;
   height: 100vh;
+  background-image: url(../../src/assets/img/login12.png);
 }
 
 .sidebar {
