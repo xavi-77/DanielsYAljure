@@ -83,6 +83,12 @@
   0 2px 4px -1px rgba($color, $bmd-shadow-umbra-opacity);
 }
 
+@mixin shadow-4dpm-color($color){
+  box-shadow: 0 4px 5px 0 rgba($color, $bmd-shadow-penumbra-opacity),
+  0 1px 10px 0 rgba($color, $bmd-shadow-ambient-opacity),
+  0 2px 4px -1px rgba($color, $bmd-shadow-umbra-opacity);
+}
+
 @mixin shadow-8dp-color($color){
   box-shadow: 0 8px 10px 1px rgba($color, $bmd-shadow-penumbra-opacity),
   0 3px 14px 2px rgba(0, 0, 0, $bmd-shadow-ambient-opacity),

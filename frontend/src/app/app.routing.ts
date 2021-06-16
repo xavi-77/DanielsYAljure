@@ -44,7 +44,10 @@ export const AppRoutes: Routes = [
     }, {
         path: '',
         loadChildren: './timeline/timeline.module#TimelineModule'
-    }
+    },{
+        path: '',
+        loadChildren: './person/persons.module#PersonsModule'
+    },
   ]}, {
       path: '',
       component: AuthLayoutComponent,

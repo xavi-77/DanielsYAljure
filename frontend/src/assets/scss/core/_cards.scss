@@ -259,9 +259,9 @@
         @include shadow-big-color($brand-success);
     }
 
-    .card-header-success .card-icon,
-    .card-header-success:not(.card-header-icon):not(.card-header-text),
-    .card-header-success .card-text{
+    .card-header-loginp .card-icon,
+    .card-header-loginp:not(.card-header-icon):not(.card-header-text),
+    .card-header-loginp .card-text{
         @include shadow-big-color($brand-loginp);
     }
 

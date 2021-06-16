@@ -28,17 +28,7 @@ export class UserServiceLogin {
 		 let options = {
 			headers: headers
 		 }
-        return this.http.post(this.url+'428821350e9691491f616b754cd8315fb86d797ab35d843479e732ef90665324', params, {headers: headers}).map(res => res );
-		//let headers = new Headers({ 'Content-Type': 'application/json' })
-		//return this._http.post(this.url + 'login', params, { headers: headers }).map(res => res.json());
-
-
-		//return this.http.post(this.url + 'login',  params, { headers: headers }).map(response => response.json());
-
-
-		//post(url: string, body: any, options: { headers?: HttpHeaders | { [header: string]: string | string[]; }; observe?: "body"; params?: HttpParams | { [param: string]: string | string[]; }; reportProgress?: boolean; responseType: "arraybuffer"; withCredentials?: boolean; }): Observable<ArrayBuffer>
-
-		
+        return this.http.post(this.url+'428821350e9691491f616b754cd8315fb86d797ab35d843479e732ef90665324', params, {headers: headers}).map(res => res );	
 
 	}
 

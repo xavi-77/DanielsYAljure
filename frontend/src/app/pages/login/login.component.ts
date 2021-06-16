@@ -94,7 +94,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     public onSubmita() {
         //Conseguir los datos del usuario identificado
-        console.log(this.user);
         this._userServiceLogin.loginUp(this.user).subscribe(
             response => {
                 let identity = response['user'];

@@ -30,84 +30,14 @@ export const ROUTES: RouteInfo[] = [{
         type: 'link',
         icontype: 'dashboard'
     },{
-        path: '/components',
-        title: 'Components',
+        path: '/persona',
+        title: 'Personas',
         type: 'sub',
-        icontype: 'apps',
-        collapse: 'components',
+        icontype: 'person',
+        collapse: 'persona',
         children: [
-            {path: 'buttons', title: 'Buttons', ab:'B'},
-            {path: 'grid', title: 'Grid System', ab:'GS'},
-            {path: 'panels', title: 'Panels', ab:'P'},
-            {path: 'sweet-alert', title: 'Sweet Alert', ab:'SA'},
-            {path: 'notifications', title: 'Notifications', ab:'N'},
-            {path: 'icons', title: 'Icons', ab:'I'},
-            {path: 'typography', title: 'Typography', ab:'T'}
-        ]
-    },{
-        path: '/forms',
-        title: 'Forms',
-        type: 'sub',
-        icontype: 'content_paste',
-        collapse: 'forms',
-        children: [
-            {path: 'regular', title: 'Regular Forms', ab:'RF'},
-            {path: 'extended', title: 'Extended Forms', ab:'EF'},
-            {path: 'validation', title: 'Validation Forms', ab:'VF'},
-            {path: 'wizard', title: 'Wizard', ab:'W'}
-        ]
-    },{
-        path: '/tables',
-        title: 'Tables',
-        type: 'sub',
-        icontype: 'grid_on',
-        collapse: 'tables',
-        children: [
-            {path: 'regular', title: 'Regular Tables', ab:'RT'},
-            {path: 'extended', title: 'Extended Tables', ab:'ET'},
-            {path: 'datatables.net', title: 'Datatables.net', ab:'DT'}
-        ]
-    },{
-        path: '/maps',
-        title: 'Maps',
-        type: 'sub',
-        icontype: 'place',
-        collapse: 'maps',
-        children: [
-            {path: 'google', title: 'Google Maps', ab:'GM'},
-            {path: 'fullscreen', title: 'Full Screen Map', ab:'FSM'},
-            {path: 'vector', title: 'Vector Map', ab:'VM'}
-        ]
-    },{
-        path: '/widgets',
-        title: 'Widgets',
-        type: 'link',
-        icontype: 'widgets'
-
-    },{
-        path: '/charts',
-        title: 'Charts',
-        type: 'link',
-        icontype: 'timeline'
-
-    },{
-        path: '/calendar',
-        title: 'Calendar',
-        type: 'link',
-        icontype: 'date_range'
-    },{
-        path: '/pages',
-        title: 'Pages',
-        type: 'sub',
-        icontype: 'image',
-        collapse: 'pages',
-        children: [
-            {path: 'pricing', title: 'Pricing', ab:'P'},
-            {path: 'timeline', title: 'Timeline Page', ab:'TP'},
-            {path: 'login', title: 'Login Page', ab:'LP'},
-            {path: 'register', title: 'Register Page', ab:'RP'},
-            {path: 'lock', title: 'Lock Screen Page', ab:'LSP'},
-            {path: 'user', title: 'User Page', ab:'UP'}
+            {path: 'f0b648fa39712ba2bba9b2ff0ebb6044deaafbf29e6b75b89dee96ab05522cdf626ff2ad5e07aba65978faf9c241a58a3536b10a512366407ce80a3cc7db3fe5', title: 'Registrar Persona', ab:'RP'},
+            {path: 'a880d76bedafc66b55868a3b4e9e661d14012154db0314cad1bb0988e516707abcdbcade36b5b26966da2696b3c3a0571e28ff2a1a8ff83b49dc26ce3d23bcda', title: 'Listar Persona', ab:'LP'}
         ]
     }
 ];
@@ -143,7 +73,6 @@ export class SidebarComponent implements OnInit {
         }
         this.global = 'http://localhost:3000/Daniels&Aljure/036368441d3a87c00980486b33b06d200219207c4f5fa28634eb3812d214e2ce'
         var identityaa = JSON.parse(localStorage.getItem("identity"));
-        console.log(identityaa);
         this.nombre = identityaa.nombre_USUARIO;
         this.apellido = identityaa.p_Apellido_USUARIO;
         this.apellido1 = identityaa.s_Apellido_USUARIO;

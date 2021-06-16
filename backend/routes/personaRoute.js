@@ -17,5 +17,6 @@ api.get('/6349b485fc8d94fe48f20190106cb8ef6d2e2db5f9631bfcd47f374cf0196c30/:id',
 api.post('/670d1a11689c25d1e58eff7211d9ce1c943d2f0c28fbbb2175264c9f49ce3f3b/:id', md_auth.ensureAuth, PersonaController.deletePerson);
 api.get('/0df17a40bef7efc59a65773a7219db38fe2e3f0346a11fadb6641fafc2cdeefd', md_auth.ensureAuth, PersonaController.getAbogado);
 api.get('/a8fea2a8eae2acb92d9b32f9f8f43a8e6bff78a52de0aef38f9f5798982259b8', md_auth.ensureAuth, PersonaController.getCliente);
+api.get('/ff4f4ce4cf5bcc3c9613176748b9880e28524745808a88729cf93c732e6d7cd8', md_auth.ensureAuth, PersonaController.listActivo);
 
 module.exports = api;

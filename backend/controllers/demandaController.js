@@ -19,13 +19,11 @@ function saveDemanda(req, res) {
         fecha_Creado_DEMANDA: today,
         estado_DEMANDA: req.body.estado_DEMANDA
     }
-    console.log(DemandaData);
     Demanda.findOne({
         where: {
             radicado_DEMANDA: req.body.radicado_DEMANDA
         }
     }).then(demand => {
-        console.log(demand);
         if (!demand) {
             Demanda.create(DemandaData)
                 .then(demandita => {

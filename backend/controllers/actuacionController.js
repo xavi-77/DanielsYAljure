@@ -21,7 +21,6 @@ function saveActuacion(req, res) {
             id_Demanda_ACTUACION: 0
         }
     }).then(actuacion => {
-        console.log(actuacion);
         if (!actuacion) {
             Actuacion.create(ActuacionData)
                 .then(actuacion => {

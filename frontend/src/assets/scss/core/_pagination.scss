@@ -41,10 +41,10 @@
         &,
         &:focus,
         &:hover{
-            background-color: $brand-primary;
-            border-color: $brand-primary;
-            color: $white-color;
-            @include shadow-4dp-color($brand-primary);
+            background-color: $caramelo-sieena;
+            border-color: $caramelo-sieena;
+            color: $beige-claro;
+            @include shadow-4dpm-color($caramelo-sieena);
         }
 
     }

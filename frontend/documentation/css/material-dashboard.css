@@ -9436,17 +9436,17 @@ tag[_ngcontent-c4]:not(:focus):not(.tag--editing):not(:active):not(.readonly):ho
 .pagination > .active > span,
 .pagination > .active > span:focus,
 .pagination > .active > span:hover {
-  background-color: #9c27b0;
-  border-color: #9c27b0;
+  background-color: #a0522d;
+  border-color: #a0522d;
   color: #FFFFFF;
-  box-shadow: 0 4px 5px 0 rgba(156, 39, 176, 0.14), 0 1px 10px 0 rgba(156, 39, 176, 0.12), 0 2px 4px -1px rgba(156, 39, 176, 0.2);
+  box-shadow: 0 4px 5px 0 #a0522d, 0 1px 10px 0 #a0522d, 0 2px 4px -1px #a0522d;
 }
 .pagination.pagination-info > .active > a, .pagination.pagination-info > .active > a:focus, .pagination.pagination-info > .active > a:hover,
 .pagination.pagination-info > .active > span,
 .pagination.pagination-info > .active > span:focus,
 .pagination.pagination-info > .active > span:hover {
-  background-color: #00bcd4;
-  border-color: #00bcd4;
+  background-color: #a0522d;
+  border-color: #a0522d;
   box-shadow: 0 4px 5px 0 rgba(0, 188, 212, 0.14), 0 1px 10px 0 rgba(0, 188, 212, 0.12), 0 2px 4px -1px rgba(0, 188, 212, 0.2);
 }
 .pagination.pagination-success > .active > a, .pagination.pagination-success > .active > a:focus, .pagination.pagination-success > .active > a:hover,

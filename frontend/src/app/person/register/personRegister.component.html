@@ -1,0 +1,107 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 ml-auto mr-auto">
+        <div class="card">
+          <form #formBovino="ngForm" (ngSubmit)="onRegistrarPersona()">
+            <div class="card-header card-header-loginp card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">person</i>
+              </div>
+              <h4 class="card-title">Registrar Persona</h4>
+            </div>
+            <div class="card-body">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="nombre" [(ngModel)]="persona.nombres_PERSONA"
+                  placeholder="Nombres" type="text" required="true">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="p_apellido" [(ngModel)]="persona.p_Apellido_PERSONA"
+                  placeholder="Primer Apellido" type="text" required="true">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="s_apellido" [(ngModel)]="persona.s_Apellido_PERSONA"
+                  placeholder="Segundo Apellido" type="text" required="false">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select matInput #name="ngModel" name="Tipo_Documento" [(ngModel)]="persona.tipo_Documento_PERSONA"
+                  placeholder="Tipo De Documento" required="true">
+                  <mat-option *ngFor="let documento of documentos" [value]="documento.value">
+                    {{ documento.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="num_documento" [(ngModel)]="persona.num_Documento_PERSONA "
+                  placeholder="Numero Documento" type="text" required="true">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" #name="ngModel" name="fecha_nacimiento"
+                  [(ngModel)]="persona.fecha_Nacimiento_PERSONA" placeholder="Fecha De Nacimiento"
+                  (click)="picker.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year"></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput  type="text" #name="ngModel" name="direccion" [(ngModel)]="persona.direccion_PERSONA"
+                  placeholder="Dirección" type="text" required="false">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="telefono" [(ngModel)]="persona.telefono_PERSONA"
+                  placeholder="Teléfono" type="text" required="false">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="celular" [(ngModel)]="persona.celular_PERSONA"
+                  placeholder="Celular" type="text" required="false">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="entidad_laboral" [(ngModel)]="persona.entidad_Laboral_PERSONA"
+                  placeholder="Entidad Laboral" type="text" required="false">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="tiempo_laboral" [(ngModel)]="persona.tiempo_Laboral_PERSONA"
+                  placeholder="Tiempo Laboral" type="text" required="false">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="direccion_laboral"
+                  [(ngModel)]="persona.direccion_Empresa_PERSONA" placeholder="Dirección Laboral" type="text"
+                  required="false">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="telefono_laboral" [(ngModel)]="persona.tel_Empresa_PERSONA"
+                  placeholder="Teléfono Laboral" type="text" required="false">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select matInput placeholder="Pensionado" #name="ngModel" name="pension"
+                  [(ngModel)]="persona.pensionado_PERSONA" required="false">
+                  <mat-option *ngFor="let pension of pensionados" [value]="pension.value">
+                    {{ pension.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="entidad_Pensionado"
+                  [(ngModel)]="persona.entidad_Pension_PERSONA" placeholder="Entidad de la Pensión" type="text"
+                  required="false">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select matInput placeholder="Tipo Persona" #name="ngModel" name="tipo_persona"
+                  [(ngModel)]="persona.tipo_PERSONA" required="false">
+                  <mat-option *ngFor="let tipopersona of tipopersonas" [value]="tipopersona.value">
+                    {{ tipopersona.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="category form-category">* Campos Obligatorios</div>
+
+            </div>
+            <div class="card-footer text-right">
+
+              <button mat-raised-button type="submit" class="btn btn-loginp">Registrar</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>

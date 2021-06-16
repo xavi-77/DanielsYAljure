@@ -18,7 +18,6 @@ function saveAnexo(req, res) {
             idAnexo: 0
         }
     }).then(anexo => {
-        console.log(anexo);
         if (!anexo) {
             Anexo.create(AnexoData)
                 .then(anexo => {

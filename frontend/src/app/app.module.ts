@@ -52,6 +52,7 @@ import { AppRoutes } from './app.routing';
 import { AuthGuard } from './services/auth.Guard';
 import { AuthService } from './services/auth.service';
 import { UserServiceLogin } from './services/service.login';
+import { PersonsModule } from './person/persons.module';
 
 @NgModule({
   exports: [

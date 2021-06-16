@@ -135,7 +135,7 @@ function getUserClientes(req, res) {
             type: dbat.sequelize.QueryTypes.SELECT
         }
     ).then(usuario => {
-        console.log(usuario);
+       
     })
 };
 
@@ -146,7 +146,6 @@ function getPersona(req, res) {
             type: dbat.sequelize.QueryTypes.SELECT
         }
     ).then(usuario => {
-        console.log(usuario);
     })
 };
 
@@ -157,7 +156,6 @@ function getUserAbogados(req, res) {
             type: dbat.sequelize.QueryTypes.SELECT
         }
     ).then(usuario => {
-        console.log(usuario);
     })
 };
 
@@ -168,7 +166,6 @@ function getUserADMIN(req, res) {
             type: dbat.sequelize.QueryTypes.SELECT
         }
     ).then(usuario => {
-        console.log(usuario);
     })
 };
 
