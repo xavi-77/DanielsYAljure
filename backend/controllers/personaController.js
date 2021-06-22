@@ -8,6 +8,7 @@ function savePerson(req, res) {
     const today = new Date();
     const personData = {
         nombres_PERSONA: req.body.nombres_PERSONA,
+        s_Nombres_PERSONA:req.body.s_Nombres_PERSONA,
         p_Apellido_PERSONA: req.body.p_Apellido_PERSONA,
         s_Apellido_PERSONA: req.body.s_Apellido_PERSONA,
         tipo_Documento_PERSONA: req.body.tipo_Documento_PERSONA,
@@ -57,6 +58,7 @@ function updatePerson(req, res) {
             const today = new Date();
             Persona.update({
                 nombres_PERSONA: req.body.nombres_PERSONA,
+                s_Nombres_PERSONA:req.body.s_Nombres_PERSONA,
                 p_Apellido_PERSONA: req.body.p_Apellido_PERSONA,
                 s_Apellido_PERSONA: req.body.s_Apellido_PERSONA,
                 tipo_Documento_PERSONA: req.body.tipo_Documento_PERSONA,

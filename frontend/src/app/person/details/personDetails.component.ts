@@ -30,7 +30,7 @@ export class PersonDetailsComponent implements OnInit {
         this.identity = this._PersonaService.getIdentity();
         this.token = this._PersonaService.getToken();
         this.url = GLOBAL.url;
-        this.persona = new Persona('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','','','');
+        this.persona = new Persona('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','','','','');
     }
     documentos = [
         { value: 'C.C.', viewValue: 'CEDULA CIUDADANIA' },

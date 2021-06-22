@@ -28,7 +28,7 @@ export class PersonUpdateComponent implements OnInit {
         this.identity = this._personService.getIdentity();
         this.token = this._personService.getToken();
         this.url = GLOBAL.url;
-        this.persona = new Persona('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'ACTIVO', '', '', '', '');
+        this.persona = new Persona('','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'ACTIVO', '', '', '', '');
     }
 
     documentos = [

@@ -13,7 +13,11 @@
             <div class="card-body">
               <mat-form-field class="example-full-width">
                 <input matInput type="text" #name="ngModel" name="nombre" [(ngModel)]="persona.nombres_PERSONA"
-                  placeholder="Nombres" type="text" required="true">
+                  placeholder="Primer Nombre" type="text" required="true">
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" #name="ngModel" name="nombre" [(ngModel)]="persona.s_Nombres_PERSONA"
+                  placeholder="Segundo Nombre" type="text" required="true">
               </mat-form-field>
               <mat-form-field class="example-full-width">
                 <input matInput type="text" #name="ngModel" name="p_apellido" [(ngModel)]="persona.p_Apellido_PERSONA"

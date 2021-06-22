@@ -2,6 +2,7 @@ export class Persona{
     constructor(
        public idPersonas  : string,
        public nombres_PERSONA: string,
+       public s_Nombres_PERSONA: string,       
        public p_Apellido_PERSONA: string,
        public s_Apellido_PERSONA: string,
        public tipo_Documento_PERSONA : string,

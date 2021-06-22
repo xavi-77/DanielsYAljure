@@ -37,7 +37,7 @@ export class PersonRegisterComponent {
     this.identity = this._personaService.getIdentity();
     this.token = this._personaService.getToken();
     this.url = GLOBAL.url;
-    this.persona = new Persona('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'ACTIVO', '', '', '', '');
+    this.persona = new Persona('','','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'ACTIVO', '', '', '', '');
 
   }
 
