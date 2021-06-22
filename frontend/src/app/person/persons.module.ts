@@ -9,7 +9,7 @@ import { MaterialModule } from '../app.module';
 import { PersonasRoutes } from './persons.routing';
 
 import { PersonRegisterComponent } from './register/personRegister.component';
-import { PersonListComponent } from './list/personListcomponent';
+import { PersonListComponent } from './list/personList.component';
 import { PersonUpdateComponent } from './update/personUpdate.component';
 import { PersonDetailsComponent } from './details/personDetails.component';
 

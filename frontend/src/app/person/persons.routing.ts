@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { PersonDetailsComponent } from './details/personDetails.component';
-import { PersonListComponent } from './list/personListcomponent';
+import { PersonListComponent } from './list/personList.component';
 import { PersonRegisterComponent } from './register/personRegister.component';
 import { PersonUpdateComponent } from './update/personUpdate.component';
 

@@ -12,7 +12,11 @@ module.exports = db.sequelize.define(
     },
     nombres_PERSONA: {
         type:
-            Sequelize.INTEGER
+            Sequelize.STRING
+    },
+    s_Nombres_PERSONA: {
+        type:
+            Sequelize.STRING
     },
     p_Apellido_PERSONA: {
         type:

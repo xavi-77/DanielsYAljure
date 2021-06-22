@@ -154,8 +154,8 @@ export class PersonListComponent implements OnInit, AfterViewInit {
           for (let i = 0; i < Object.keys(response).length; i++) {
             const suma = i + 1;
             this.dataTable.dataRows.push(
-              [suma, response[i].nombres_PERSONA, response[i].p_Apellido_PERSONA + ' ' + response[i].s_Apellido_PERSONA, response[i].tipo_Documento_PERSONA + ' ' + response[i].num_Documento_PERSONA, response[i].tipo_PERSONA, '/persona/e2f4d6f5b31e7a688b3e00183576bffe4c1a1a353ebfd04b937bc3cb1a86bcb1977e7c4cb858dc5677589d88603f23d2a6501d22a316f246b259f06ce36e8427/' + response[i].idPersonas, response[i].idPersonas, '/persona/3032dc27365b7d4e6b55cdad543af764e6e57e533484a7469b93c51ef435fa2a986b126c20bce17f19129187c502c8c5e5dc6c4f78dd7180490bc63ae44c8959/' + response[i].idPersonas]
-            )
+              [suma, response[i].nombres_PERSONA+' '+ response[i].s_Nombres_PERSONA, response[i].p_Apellido_PERSONA + ' ' + response[i].s_Apellido_PERSONA, response[i].tipo_Documento_PERSONA + ' ' + response[i].num_Documento_PERSONA, response[i].tipo_PERSONA, '/persona/e2f4d6f5b31e7a688b3e00183576bffe4c1a1a353ebfd04b937bc3cb1a86bcb1977e7c4cb858dc5677589d88603f23d2a6501d22a316f246b259f06ce36e8427/' + response[i].idPersonas, response[i].idPersonas, '/persona/3032dc27365b7d4e6b55cdad543af764e6e57e533484a7469b93c51ef435fa2a986b126c20bce17f19129187c502c8c5e5dc6c4f78dd7180490bc63ae44c8959/' + response[i].idPersonas]
+              )
           }
 
         } else {
