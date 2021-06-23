@@ -47,6 +47,9 @@ export const AppRoutes: Routes = [
     },{
         path: '',
         loadChildren: './person/persons.module#PersonsModule'
+    },{
+        path: '',
+        loadChildren: './demandas/demands.module#DemandasModule'
     },
   ]}, {
       path: '',

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from '../../services/global';
 import { Verifica } from '../../models/verificacion';
-import { Persona } from '../../models/persona';
+import { Demanda } from '../../models/demanda';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 
@@ -13,7 +13,7 @@ declare var $: any;
 const controller = {};
 
 @Injectable()
-export class PersonaService {
+export class DemandaService {
 	public url: string;
 	public token;
 	public identity;
@@ -24,37 +24,37 @@ export class PersonaService {
 
 	}
 
-	getPersonas(token, idPersonas = null) {
+	getDemandas(token, idDemandas  = null) {
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
 
-		if (idPersonas == null) {
-			return this._http.get(this.url + 'ff4f4ce4cf5bcc3c9613176748b9880e28524745808a88729cf93c732e6d7cd8', { headers: headers }).map(res => res);
+		if (idDemandas  == null) {
+			return this._http.get(this.url + '4658f0073a07acb51f9f155f77916b078b8246a02d54c756f2f27adef51d150e', { headers: headers }).map(res => res);
 
 		} else {
-			return this._http.get(this.url + '6349b485fc8d94fe48f20190106cb8ef6d2e2db5f9631bfcd47f374cf0196c30/' + idPersonas, { headers: headers }).map(res => res);
+			return this._http.get(this.url + '6d16360687030f7b11a3d78f0c6920039bccfb23370a5bbb0388abca08a5e4af/' + idDemandas, { headers: headers }).map(res => res);
 		}
 
 	}
 
-	getPersonaId(token, id:string) {
+	getDemandaId(token, id:string) {
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
-		return this._http.get(this.url + '6349b485fc8d94fe48f20190106cb8ef6d2e2db5f9631bfcd47f374cf0196c30/' + id, { headers: headers })
+		return this._http.get(this.url + '6d16360687030f7b11a3d78f0c6920039bccfb23370a5bbb0388abca08a5e4af/' + id, { headers: headers })
 			.map(res => res);
 	}
 
-	addPersona(token, persona: Persona) {
-		let params = JSON.stringify(persona);
+	addDemanda(token, demanda: Demanda) {
+		let params = JSON.stringify(demanda);
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
-		if (persona.nombres_PERSONA.length == 0 || persona.num_Documento_PERSONA.length == 0 || persona.p_Apellido_PERSONA.length == 0) {
+		if (demanda.radicado_DEMANDA == '' ||demanda.radicado_DEMANDA == ' ' || demanda.juzgado_Origen_DEMANDA == '' || demanda.juzgado_Origen_DEMANDA == ' ' || demanda.id_Abogado_DEMANDA == '' || demanda.id_Abogado_DEMANDA == ' ' || demanda.id_Cliente_DEMANDA == '' || demanda.id_Cliente_DEMANDA == ' ') {
 			$.notify({
 				icon: 'warning',
 				message: '¡Rellene Todos los Campos De Forma Correcta!'
@@ -80,7 +80,7 @@ export class PersonaService {
 		} else {
 			$.notify({
 				icon: 'success',
-				message: '¡Persona Registrada Exitosamente!'
+				message: '¡ Demanda Registrada Exitosamente!'
 
 			}, {
 				type: 'success',
@@ -101,24 +101,24 @@ export class PersonaService {
 					'</div>'
 			});
 
-			this._router.navigateByUrl('persona/a880d76bedafc66b55868a3b4e9e661d14012154db0314cad1bb0988e516707abcdbcade36b5b26966da2696b3c3a0571e28ff2a1a8ff83b49dc26ce3d23bcda');
-			return this._http.post(this.url + '1c666231894daf6f8fe18f1b1b5f2d82fa67b8f194ec73139ce51e09e786b126', params, { headers: headers }).map(res => res);
+			//this._router.navigateByUrl('bovino/list');
+			return this._http.post(this.url + 'e20f8f581747bb25fa5df1667edd0dc47fb7dfbb28263556846cbea1d13a6fed', params, { headers: headers }).map(res => res);
 		}
 
 
 	}
 
-	editPersona(token, id: string, persona: Persona) {
-		let params = JSON.stringify(persona);
+	editDemanda(token, id: string, demanda: Demanda) {
+		let params = JSON.stringify(demanda);
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
 
-		return this._http.put(this.url + '0cbbcf507cfc6b6c2db5a6babd0347dc723df6807bc56b8cf35df35ccd179faf/' + id, params, { headers: headers }).map(res => res);
+		return this._http.put(this.url + 'eb6ba149e636dade12e394db69c412a6993749a7fd97cf2b5c15d2a4717e6183/' + id, params, { headers: headers }).map(res => res);
 	}
 
-	deletePersona(token, id: string, idus:string, codigo:string) {
+	deleteDemanda(token, id: string, idus:string, codigo:string) {
 		let datica ={
 			iduser: idus,
 			codigo: codigo
@@ -128,25 +128,25 @@ export class PersonaService {
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
-		return this._http.post(this.url + '670d1a11689c25d1e58eff7211d9ce1c943d2f0c28fbbb2175264c9f49ce3f3b/' + id, params, { headers: headers }).map(res => res);
+		return this._http.post(this.url + 'b5bc3c9a03d23fdefa31add286c1650a340daf0845f4e6c9b0089f35440fd48b/' + id, params, { headers: headers }).map(res => res);
 	}
 
-	listPersonaAbogado(token){
+	listDemandaRadicado(token){
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
-		return this._http.get(this.url + '0df17a40bef7efc59a65773a7219db38fe2e3f0346a11fadb6641fafc2cdeefd', { headers: headers })
+		return this._http.get(this.url + 'f1c43b4852ecae7152c25b3bfc1d44d9af045f148415f6f79ca3f4e8f02d2231', { headers: headers })
 			.map(res => res);
 
 	}
 
-	listPersonaCliente(token){
+	listDemandaporId(token, id: string){
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
-		return this._http.get(this.url + 'a8fea2a8eae2acb92d9b32f9f8f43a8e6bff78a52de0aef38f9f5798982259b8', { headers: headers }).map(res => res);
+		return this._http.get(this.url + '6d16360687030f7b11a3d78f0c6920039bccfb23370a5bbb0388abca08a5e4af' + id, { headers: headers }).map(res => res);
 
 	}
 

@@ -1,0 +1,65 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <div class="card">
+            <form #formBovino="ngForm" (ngSubmit)="onRegistrarDemanda()">
+              <div class="card-header card-header-loginp card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">folder</i>
+                </div>
+                <h4 class="card-title">Registrar Demanda</h4>
+              </div>
+              <div class="card-body">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="text" #name="ngModel" name="tipodemanda" [(ngModel)]="demanda.tipo_DEMANDA"
+                    placeholder="Tipo de Demanda" type="text" required="true">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <input matInput type="text" #name="ngModel" name="especialidad" [(ngModel)]="demanda.especialida_DEMANDA"
+                    placeholder="Especialidad" type="text" required="true">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <input matInput type="text" #name="ngModel" name="radicado" [(ngModel)]="demanda.radicado_DEMANDA"
+                    placeholder="Numero de Radicado" type="text" required="true">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <input matInput type="text" #name="ngModel" name="juzgado" [(ngModel)]="demanda.juzgado_Origen_DEMANDA"
+                    placeholder="Juzgado Origen" type="text" required="false">
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-select matInput #name="ngModel" name="abogado" [(ngModel)]="demanda.id_Abogado_DEMANDA"
+                    placeholder="Abogado" required="true">
+                    <mat-option *ngFor="let abogadito of abogados" [value]="abogadito.id_Abogado_DEMANDA">
+                      {{ abogadito.nombres_PERSONA }}+' '+{{abogadito.p_Apellido_PERSONA}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select matInput #name="ngModel" name="cliente" [(ngModel)]="demanda.id_Cliente_DEMANDA"
+                      placeholder="Cliente" required="true">
+                      <mat-option *ngFor="let cliente of clientes" [value]="cliente.id_Abogado_DEMANDA">
+                        {{ cliente.nombres_PERSONA }}+' '+{{cliente.p_Apellido_PERSONA}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" #name="ngModel" name="fecharadicado"
+                    [(ngModel)]="demanda.fecha_DEMANDA" placeholder="Fecha De Radicación"
+                    (click)="picker.open()">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker startView="year"></mat-datepicker>
+                </mat-form-field>
+                <div class="category form-category">* Campos Obligatorios</div>
+  
+              </div>
+              <div class="card-footer text-right">
+  
+                <button mat-raised-button type="submit" class="btn btn-loginp">Registrar</button>
+              </div>
+            </form>
+          </div>
+  
+        </div>
+      </div>
+    </div>

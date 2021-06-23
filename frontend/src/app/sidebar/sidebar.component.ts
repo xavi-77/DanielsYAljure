@@ -39,6 +39,16 @@ export const ROUTES: RouteInfo[] = [{
             {path: 'f0b648fa39712ba2bba9b2ff0ebb6044deaafbf29e6b75b89dee96ab05522cdf626ff2ad5e07aba65978faf9c241a58a3536b10a512366407ce80a3cc7db3fe5', title: 'Registrar Persona', ab:'RP'},
             {path: 'a880d76bedafc66b55868a3b4e9e661d14012154db0314cad1bb0988e516707abcdbcade36b5b26966da2696b3c3a0571e28ff2a1a8ff83b49dc26ce3d23bcda', title: 'Listar Persona', ab:'LP'}
         ]
+    },{
+        path: '/demanda',
+        title: 'Demandas',
+        type: 'sub',
+        icontype: 'folder',
+        collapse: 'demanda',
+        children: [
+            {path: '73d418fec8237a33c5dda0a770544df8d031077d2bc37ad0cd574bbf3e78014ca51eacc170dd67a971c7d8b7c3d50205a41452419cf11ddd1178fb27fedbd2cc', title: 'Registrar Demanda', ab:'RD'},
+            {path: '70098a45fdb68758e402118323a910d8e1541ab04c1bccf1252995527194d12633303219c0615a280d3cf4a5e82bdbba21f8e35373de5426910986b96beb399f', title: 'Listar Demanda', ab:'LD'}
+        ]
     }
 ];
 @Component({
