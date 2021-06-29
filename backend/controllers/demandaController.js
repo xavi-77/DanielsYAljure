@@ -2,6 +2,7 @@
 var fs = require('fs');
 var path = require('path');
 var Demanda = require('../model/demanda');
+var Persona = require('../model/persona')
 var User = require('../model/usuario');
 var dbat = require('../database/db');
 
@@ -158,6 +159,25 @@ function deletePerson(req, res) {
         });
 };
 */
+
+/*function listarDemandasCompletas(req, res){
+    db.seq.query('SELECT * FROM ((`demandas` as dem INNER JOIN `personas` as pert ON dem.id_Abogado_DEMANDA = pert.idPersonas) INNER JOIN `personas`as pertu ON dem.id_Cliente_DEMANDA = pertu.idPersonas)').success(function(rows){
+        res.json(rows);
+    });
+
+}*/
+/*function listarDemandasCompletas(req, res){
+    Demanda.findAll({
+        include: [{
+          model: Persona,
+      //  required: false
+         }]
+      }).then(demandita => {
+        console.log('Hola');
+      });
+    
+}*/
+
 
 
 module.exports = {

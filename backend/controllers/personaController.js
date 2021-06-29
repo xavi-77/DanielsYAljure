@@ -84,8 +84,7 @@ function updatePerson(req, res) {
         })
 };
 
-function 
-deletePerson(req, res) {
+function deletePerson(req, res) {
     var personaId = req.params.id;
     var useridd = req.body.iduser;
     var codigo = req.body.codigo;

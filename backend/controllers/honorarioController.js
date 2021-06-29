@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var Honorario = require('../model/honorario');
 var User = require('../model/usuario');
+var Persona = require('../model/persona');
 var dbat = require('../database/db');
 
 function saveHonorario(req, res) {
@@ -145,7 +146,6 @@ function deletePerson(req, res) {
         });
 };
 */
-
 
 module.exports = {
     saveHonorario,
