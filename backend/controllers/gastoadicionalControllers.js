@@ -1,17 +1,20 @@
-+'use strict'
+'use strict'
 var fs = require('fs');
 var path = require('path');
-var GastosAdicionales = require('../model/gastosadicionale');
-var User = require('../model/usuario');
+var GastosAdicionales = require('../models/gastosadicional');
+var Persona = require('../models/persona');
+var Demanda = require('../models/demanda');
+var Abogado = require('../models/abogado');
+var User = require('../models/usuario');
 var dbat = require('../database/db');
 
 function saveGastosAdicionales(req, res) {
-    const today = new Date();
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     const GastosAdicionalesData = {
         concepto_GASTOADICIONAL: req.body.concepto_GASTOADICIONAL,
         valor_GASTOADICIONAL: req.body.valor_GASTOADICIONAL,
         id_Demanda_GASTOADICIONAL: req.body.id_Demanda_GASTOADICIONAL,
-        estado_GASTOADICIONAL: req.body.estado_GASTOADICIONAL,
+        estado_GASTOADICIONAL: 'DEUDA',
         fecha_Creado_GASTOADICIONAL: today
     }
     GastosAdicionales.findOne({
@@ -43,12 +46,11 @@ function updateGastosAdicionales(req, res) {
         where: { idGastosAdicionales: gastosAdicionalesId }
 
     }).then(gastosAdicionales => {
-        const today = new Date();
+        const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
         GastosAdicionales.update({
             concepto_GASTOADICIONAL: req.body.concepto_GASTOADICIONAL,
             valor_GASTOADICIONAL: req.body.valor_GASTOADICIONAL,
             id_Demanda_GASTOADICIONAL: req.body.id_Demanda_GASTOADICIONAL,
-            estado_GASTOADICIONAL: req.body.estado_GASTOADICIONAL,
             fecha_Modificado_GASTOADICIONAL: today
         }, { where: { idGastosAdicionales: gastosAdicionalesId } })
             .then(gastosAdicionales => {
@@ -61,7 +63,7 @@ function deleteGastosAdicionales(req, res) {
     var gastosAdicionalesId = req.params.id;
     var useridd = req.body.iduser;
     var codigo = req.body.codigo;
-    const today = new Date();
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     User.findOne({ where: { idUsuario: useridd, codigo_Seguridad_USUARIO: codigo } })
         .then(user => {
             if (user) {
@@ -89,18 +91,21 @@ function deleteGastosAdicionales(req, res) {
         })
 };
 
-
-function listGastosAdicionales(req, res) {
-    GastosAdicionales.findAll()
-        .then(gastosAdicionales => {
-            res.send(gastosAdicionales)
-        })
-};
-
-function listGastosAdicionalesEstadoActivo(req, res) {
+function listGastosAdicionalesEstadoDeuda(req, res) {
     GastosAdicionales.findAll({
+        include: {
+            model: Demanda,
+            as: 'demanda',
+            include: [{
+                model: Persona,
+                as: 'persona'
+            }, {
+                model: Abogado,
+                as: 'abogado'
+            }]
+        },
         where: {
-            estado_GASTOADICIONAL: 'ACTIVO'
+            estado_GASTOADICIONAL: 'DEUDA'
         }
     })
         .then(gastosAdicionales => {
@@ -108,46 +113,33 @@ function listGastosAdicionalesEstadoActivo(req, res) {
         })
 };
 
-function listarGastosAdicionalesId(req, res) {
-    var gastosAdicionalesId = req.params.id;
-    Honorario.findOne({ where: { idGastosAdicionales: gastosAdicionalesId } })
+function listarGastosAdicionaleEstadoPago(req, res) {
+    GastosAdicionales.findAll({
+        include: {
+            model: Demanda,
+            as: 'demanda',
+            include: [{
+                model: Persona,
+                as: 'persona'
+            }, {
+                model: Abogado,
+                as: 'abogado'
+            }]
+        },
+        where: {
+            estado_GASTOADICIONAL: 'PAGO'
+        }
+    })
         .then(gastosAdicionales => {
             res.send(gastosAdicionales)
         })
 };
-
-
-/*function getCliente(req, res) {
-    dbat.sequelize.query('SELECT * FROM personas WHERE genero = :genero ',
-        {
-            replacements: { tipo_PERSONA: 'CLIENTE' },
-            type: dbat.sequelize.QueryTypes.SELECT
-        }
-    ).then(clientecitos => {
-        res.send(clientecitos)
-    })
-};
-
-
-function deletePerson(req, res) {
-    var personaId = req.params.id;
-    Persona.findByPk(personaId)
-        .then(persona => {
-            Persona.destroy();
-            res.status(200).json({ message: 'Persona Eliminada...!' });
-        })
-        .catch(err => {
-            res.status(404).json({ message: 'Persona  No Existe...!' });
-        });
-};
-*/
 
 
 module.exports = {
     saveGastosAdicionales,
     updateGastosAdicionales,
     deleteGastosAdicionales,
-    listGastosAdicionales,
-    listGastosAdicionalesEstadoActivo,
-    listarGastosAdicionalesId
+    listGastosAdicionalesEstadoDeuda,
+    listarGastosAdicionaleEstadoPago
 };

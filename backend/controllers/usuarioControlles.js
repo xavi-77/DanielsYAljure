@@ -1,22 +1,26 @@
 var fs = require('fs');
 var path = require('path');
 var bcrypt = require('bcrypt');
-var User = require('../model/usuario');
+var User = require('../models/usuario');
+var Abogado = require('../models/abogado');
 const jwt = require('../services/jwt');
 var dbat = require('../database/db');
+const Sequelize = require('Sequelize');
+const op = Sequelize.Op;
+require('../config/asociations');
 const saltRounds = 12;
 
 
 function saveUsuario(req, res) {
 
-    const today = new Date();
-    var correousuario = req.body.correo_USUARIO;
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     const userData = {
-        correo_USUARIO: correousuario.toUpperCase(),
+        correo_USUARIO: req.body.correo_USUARIO,
         contra_USUARIO: req.body.contra_USUARIO,
         tipo_USUARIO: req.body.tipo_USUARIO,
         id_Persona_USUARIO: req.body.id_Persona_USUARIO,
-        fecha_creado: today
+        codigo_Seguridad_USUARIO: req.body.codigo_Seguridad_USUARIO,
+        fecha_Creado_USUARIO: today
     }
     User.findOne({
         where: {
@@ -43,6 +47,128 @@ function saveUsuario(req, res) {
             res.send('error: ' + err);
         })
 };
+
+
+function updateUsuario(req, res) {
+    var userId = req.params.id;
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    User.findOne({ where: { idUsuario: userId } })
+        .then(user => {
+            User.update({
+                correo_USUARIO: req.body.correo_USUARIO,
+                contra_USUARIO: req.body.contra_USUARIO,
+                tipo_USUARIO: req.body.tipo_USUARIO,
+                id_Persona_USUARIO: req.body.id_Persona_USUARIO,
+                codigo_Seguridad_USUARIO: req.body.codigo_Seguridad_USUARIO,
+                fecha_Modificado_USUARIO: today
+            }, { where: { idUsuario: userId } })
+                .then(nuevoUsuario => {
+                    res.json(nuevoUsuario)
+                })
+        })
+};
+
+function listUsuario(req, res) {
+    User.findAll({
+        include: {
+            model: Abogado,
+            as: 'abogado'
+        },
+        where: {
+            '$abogado.estado_ABOGADO$': { [op.eq]: 'ACTIVO' }
+        }
+    })
+        .then(user => {
+            res.send(user);
+        })
+};
+
+function login(req, res) {
+    User.findOne({
+        where: {
+            correo_USUARIO: req.body.correo_USUARIO,
+            estado_USUARIO: 'ACTIVO'
+        }
+    })
+        .then(user => {
+            if (user) {
+                bcrypt.compare(req.body.contra_USUARIO, user.contra_USUARIO, function (err, result) {
+                    if (result) {
+                        if (req.body.gethash) {
+                            User.findAll({
+                                include: {
+                                    model: Abogado,
+                                    as: 'abogado'
+                                },
+                                where: {
+                                    '$abogado.idAbogados$': user.id_Persona_USUARIO
+                                }
+                            })
+                                .then(userato => {
+                                    res.status(200).send({
+                                        token: jwt.createToken(userato)
+                                    });
+                                })
+
+                        } else {
+                            res.status(200).send({ user })
+                        }
+                    } else {
+                        res.status(404).send({ message: 'La cuenta o la contraseña es incorrecta. Si no recuerdas la cuenta o la contraseña pida ayuda al administrador!' });
+                    }
+                });
+            } else {
+                res.status(404).send({ message: 'La cuenta esta desactivada...!' });
+            }
+
+        })
+        .catch(err => {
+            res.send('error: ' + err);
+        })
+};
+
+function listUsuarioaa(req, res) {
+    User.findAll({
+        include: {
+            model: 'Persona',
+            as: 'persona'
+        },
+        where: {
+            [op.and]: [
+                { correo_USUARIO: req.body.correo_USUARIO },
+                { '$persona.estado_Usuario_PERSONA$': { [op.eq]: 'ACTIVO' } }]
+        }
+    })
+        .then(user => {
+            res.send(user)
+        })
+};
+/*
+
+function deleteUsuario(req, res) {
+    var userId = req.params.id;
+    var codigo = req.body.codigo;
+    const today = new Date();
+    User.findOne({ where: { idUsuario: userId } })
+        .then(user => {
+            if (codigo == user.codigo_Seguridad_USUARIO) {
+                User.update({
+                    estado_USUARIO: req.body.estado_USUARIO,
+                    fecha_Eliminado_PERSONA: today
+                }, {
+                    where: { idUsuario: userId }
+
+                }).then(nuevoUsuario => {
+                    res.status(200).json({ message: 'Usuario Eliminado...!' });
+                })
+            } else {
+                res.status(404).json({ message: 'Su código de verificación no es válido...!' });
+            }
+
+        })
+};
+
+
 
 function login(req, res) {
     User.findOne({
@@ -76,27 +202,6 @@ function login(req, res) {
         })
 };
 
-function updateUsuario(req, res) {
-    var userId = req.params.id;
-    const today = new Date();
-    User.findOne({ where: { idUsuario: userId } })
-        .then(user => {
-            User.update({
-                nombre_USUARIO: req.body.nombre_USUARIO,
-                p_Apellido_USUARIO: req.body.p_Apellido_USUARIO,
-                s_Apellido_USUARIO: req.body.s_Apellido_USUARIO,
-                correo_USUARIO: req.body.correo_USUARIO,
-                contra_USUARIO: req.body.contra_USUARIO,
-                tipo_USUARIO: req.body.tipo_USUARIO,
-                estado_USUARIO: req.body.estado_USUARIO,
-                id_Persona_USUARIO: req.body.id_Persona_USUARIO,
-                fecha_Modificado_PERSONA: today
-            }, { where: { idUsuario: userId } })
-                .then(nuevoUsuario => {
-                    res.json(nuevoUsuario)
-                })
-        })
-};
 
 function listUsuario(req, res) {
     User.findAll()
@@ -105,28 +210,7 @@ function listUsuario(req, res) {
         })
 };
 
-function deleteUsuario(req, res) {
-    var userId = req.params.id;
-    var codigo = req.body.codigo;
-    const today = new Date();
-    User.findOne({ where: { idUsuario: userId } })
-        .then(user => {
-            if (codigo == user.codigo_Seguridad_USUARIO) {
-                User.update({
-                    estado_USUARIO: req.body.estado_USUARIO,
-                    fecha_Eliminado_PERSONA: today
-                }, {
-                    where: { idUsuario: userId }
 
-                }).then(nuevoUsuario => {
-                    res.status(200).json({ message: 'Usuario Eliminado...!' });
-                })
-            } else {
-                res.status(404).json({ message: 'Su código de verificación no es válido...!' });
-            }
-
-        })
-};
 
 function getUserClientes(req, res) {
     dbat.sequelize.query('SELECT * FROM usuarios WHERE tipo_USUARIO = :tipo_USUARIO ',
@@ -225,15 +309,19 @@ function getImageFile(req, res) {
 */
 module.exports = {
     saveUsuario,
-    login,
     updateUsuario,
     listUsuario,
-    deleteUsuario,
-    getUserClientes,
-    getUserAbogados,
-    getUserADMIN,
-    getPersona,
-    uploadImage,
-    getImageFile
+    login,
+    listUsuarioaa
+    /* 
+     deleteUsuario,
+     
+     
+     getUserClientes,
+     getUserAbogados,
+     getUserADMIN,
+     getPersona,
+     uploadImage,
+     getImageFile*/
 
 };

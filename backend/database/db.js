@@ -1,22 +1,13 @@
-'use strict'
-const Sequelize = require('sequelize');
-const db = {};
-const sequelize = new Sequelize('valhalla_thor','root','',{
-    host: 'localhost',
-    dialect: 'mysql',
-    operatorAliases: false,
+const { Sequelize } = require('sequelize');
+const { database } = require('../config/config');
 
-    pool: {
-        max: 5,
-        min: 0,
-        acquire:30000,
-        idle: 10000
+const sequelize = new Sequelize(
+    database.database,
+    database.username,
+    database.password, {
+        host: database.host,
+        dialect: "mysql"
     }
-});
+);
 
-
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+module.exports = sequelize;

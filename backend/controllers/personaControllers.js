@@ -1,11 +1,11 @@
 var fs = require('fs');
 var path = require('path');
-var Persona = require('../model/persona');
-var User = require('../model/usuario');
+var Persona = require('../models/persona');
+var User = require('../models/usuario');
 var dbat = require('../database/db');
 
 function savePerson(req, res) {
-    const today = new Date();
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     const personData = {
         nombres_PERSONA: req.body.nombres_PERSONA,
         s_Nombres_PERSONA:req.body.s_Nombres_PERSONA,
@@ -25,8 +25,7 @@ function savePerson(req, res) {
         entidad_Pension_PERSONA: req.body.entidad_Pension_PERSONA,
         estado_Usuario_PERSONA: 'ACTIVO',
         tipo_PERSONA: req.body.tipo_PERSONA,
-        fecha_Creado_PERSONA: today,
-        imagen_PERSONA: req.body.imagen_PERSONA
+        fecha_Creado_PERSONA: today
     }
     Persona.findOne({
         where: {
@@ -36,7 +35,7 @@ function savePerson(req, res) {
         if (!persona) {
             Persona.create(personData)
                 .then(persona => {
-                    res.json({ success: 'Cliente o Abogado Regitrado Satisfactoriamente...!' });
+                    res.json({ success: 'Cliente Regitrado Satisfactoriamente...!' });
                 })
                 .catch(err => {
                     res.send('error: ' + err);
@@ -55,7 +54,7 @@ function updatePerson(req, res) {
 
     Persona.findOne({ where: { idPersonas: personaId } })
         .then(persona => {
-            const today = new Date();
+            const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
             Persona.update({
                 nombres_PERSONA: req.body.nombres_PERSONA,
                 s_Nombres_PERSONA:req.body.s_Nombres_PERSONA,
@@ -78,17 +77,17 @@ function updatePerson(req, res) {
                 fecha_Creado_PERSONA: today,
                 imagen_PERSONA: req.body.imagen_PERSONA
             }, { where: { idPersonas: personaId } })
-                .then(nuevoPersona => {
-                    res.json(nuevoPersona)
-                })
-        })
+                .then(nuevaPersona => {
+                    res.json(nuevaPersona);
+                });
+        });
 };
 
 function deletePerson(req, res) {
     var personaId = req.params.id;
     var useridd = req.body.iduser;
     var codigo = req.body.codigo;
-    const today = new Date();
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     User.findOne({ where: { idUsuario: useridd, codigo_Seguridad_USUARIO: codigo } })
         .then(user => {
             if (user) {
@@ -113,43 +112,6 @@ function deletePerson(req, res) {
                 res.status(404).json({ message: 'Su código de verificación no es válido...!' });
             }
 
-        })
-};
-
-
-function listPerson(req, res) {
-    Persona.findAll()
-        .then(persona => {
-            res.send(persona)
-        })
-};
-
-function listarPersonId(req, res) {
-    var personaId = req.params.id;
-    Persona.findOne({ where: { idPersonas: personaId } })
-        .then(persona => {
-            res.send(persona)
-        })
-};
-
-function listAbogado(req, res) {
-    Persona.find({ where: { tipo_PERSONA: "ABOGADO" } })
-        .then(persona => {
-            res.send(persona)
-        })
-};
-
-function listActivo(req, res) {
-    Persona.findAll({ where: { estado_Usuario_PERSONA: "ACTIVO" } })
-        .then(persona => {
-            res.send(persona)
-        })
-};
-
-function listClientes(req, res) {
-    Persona.find({ where: { tipo_PERSONA: "CLIENTE" } })
-        .then(persona => {
-            res.send(persona)
         })
 };
 
@@ -192,8 +154,49 @@ function getImageFile(req, res) {
 
 };
 
+function listActivo(req, res) {
+    Persona.findAll({ where: { estado_Usuario_PERSONA: "ACTIVO" } })
+        .then(persona => {
+            res.send(persona)
+        })
+};
+
+/*
+function listPerson(req, res) {
+    Persona.findAll()
+        .then(persona => {
+            res.send(persona)
+        })
+};
+
+function listarPersonId(req, res) {
+    var personaId = req.params.id;
+    Persona.findOne({ where: { idPersonas: personaId } })
+        .then(persona => {
+            res.send(persona)
+        })
+};
+
+function listAbogado(req, res) {
+    Persona.findAll({ where: { tipo_PERSONA: "ABOGADO" } })
+        .then(persona => {
+            res.send(persona)
+        })
+};
+
+
+
+function listClientes(req, res) {
+    Persona.findAll({ where: { tipo_PERSONA: "CLIENTE" } })
+        .then(persona => {
+            res.send(persona)
+        })
+};
+
+
+
 function getAbogado(req, res) {
-    dbat.sequelize.query('SELECT * FROM personas WHERE genero = :genero ',
+    dbat.sequelize.query('SELECT * FROM personas WHERE tipo_PERSONA = :tipo_PERSONA ',
         {
             replacements: { tipo_PERSONA: 'ABOGADO' },
             type: dbat.sequelize.QueryTypes.SELECT
@@ -204,7 +207,7 @@ function getAbogado(req, res) {
 };
 
 function getCliente(req, res) {
-    dbat.sequelize.query('SELECT * FROM personas WHERE genero = :genero ',
+    dbat.sequelize.query('SELECT * FROM personas WHERE tipo_PERSONA = :tipo_PERSONA ',
         {
             replacements: { tipo_PERSONA: 'CLIENTE' },
             type: dbat.sequelize.QueryTypes.SELECT
@@ -232,14 +235,15 @@ function getCliente(req, res) {
 module.exports = {
     savePerson,
     updatePerson,
-    listPerson,
+    deletePerson,
     uploadImage,
     getImageFile,
-    deletePerson,
+    listActivo
+    /*listPerson,
     getAbogado,
     getCliente,
     listAbogado,
     listClientes,
     listarPersonId,
-    listActivo
+    */
 };

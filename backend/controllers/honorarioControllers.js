@@ -1,20 +1,21 @@
-+'use strict'
+'use strict'
 var fs = require('fs');
 var path = require('path');
-var Honorario = require('../model/honorario');
-var User = require('../model/usuario');
-var Persona = require('../model/persona');
+var Honorario = require('../models/honorario');
+var Persona = require('../models/persona');
+var Demanda = require('../models/demanda');
+var Abogado = require('../models/abogado');
+var User = require('../models/usuario');
 var dbat = require('../database/db');
 
 function saveHonorario(req, res) {
-    const today = new Date();
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     const HonorarioData = {
         id_Demanda_HONORARIO: req.body.id_Demanda_HONORARIO,
-        id_Abogado_HONORARIO: req.body.id_Abogado_HONORARIO,
-        id_Cliente_HONORARIO: req.body.id_Cliente_HONORARIO,
         concepto_HONORARIO: req.body.concepto_HONORARIO,
+        id_Demanda_HONORARIO: req.body.id_Demanda_HONORARIO,
         total_HONORARIO: req.body.total_HONORARIO,
-        estado_HONORARIO: req.body.estado_HONORARIO,
+        estado_HONORARIO: 'DEUDA',
         fecha_Creado_HONORARIO: today
     }
     Honorario.findOne({
@@ -46,16 +47,15 @@ function updateHonorario(req, res) {
         where: { idHonorarios: honorarioId }
 
     }).then(honorario => {
-        const today = new Date();
+        const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
         Honorario.update({
             id_Demanda_HONORARIO: req.body.id_Demanda_HONORARIO,
-            id_Abogado_HONORARIO: req.body.id_Abogado_HONORARIO,
-            id_Cliente_HONORARIO: req.body.id_Cliente_HONORARIO,
             concepto_HONORARIO: req.body.concepto_HONORARIO,
+            id_Demanda_HONORARIO: req.body.id_Demanda_HONORARIO,
             total_HONORARIO: req.body.total_HONORARIO,
             estado_HONORARIO: req.body.estado_HONORARIO,
-            fecha_Modificado_HONORARIO: today
-        }, { where: { idActuaciones: actuacionId } })
+            fecha_Creado_HONORARIO: today
+        }, { where: { idHonorarios: honorarioId } })
             .then(honorario => {
                 res.json(honorario)
             })
@@ -66,7 +66,7 @@ function deleteHonorario(req, res) {
     var honorarioId = req.params.id;
     var useridd = req.body.iduser;
     var codigo = req.body.codigo;
-    const today = new Date();
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     User.findOne({ where: { idUsuario: useridd, codigo_Seguridad_USUARIO: codigo } })
         .then(user => {
             if (user) {
@@ -102,10 +102,43 @@ function listHonorario(req, res) {
         })
 };
 
-function listHonorarioEstadoActivo(req, res) {
+function listHonorarioEstadoDeuda(req, res) {
     Honorario.findAll({
+        include: {
+            model: Demanda,
+            as: 'demanda',
+            include: [{
+                model: Persona,
+                as: 'persona'
+            }, {
+                model: Abogado,
+                as: 'abogado'
+            }]
+        },
         where: {
-            estado_HONORARIO: 'ACTIVO'
+            estado_HONORARIO: 'DEUDA'
+        }
+    })
+        .then(nuevoHonorario => {
+            res.send(nuevoHonorario)
+        })
+};
+
+function listHonorarioEstadoPago(req, res) {
+    Honorario.findAll({
+        include: {
+            model: Demanda,
+            as: 'demanda',
+            include: [{
+                model: Persona,
+                as: 'persona'
+            }, {
+                model: Abogado,
+                as: 'abogado'
+            }]
+        },
+        where: {
+            estado_HONORARIO: 'PAGO'
         }
     })
         .then(nuevoHonorario => {
@@ -121,37 +154,11 @@ function listarHonorarioId(req, res) {
         })
 };
 
-
-/*function getCliente(req, res) {
-    dbat.sequelize.query('SELECT * FROM personas WHERE genero = :genero ',
-        {
-            replacements: { tipo_PERSONA: 'CLIENTE' },
-            type: dbat.sequelize.QueryTypes.SELECT
-        }
-    ).then(clientecitos => {
-        res.send(clientecitos)
-    })
-};
-
-
-function deletePerson(req, res) {
-    var personaId = req.params.id;
-    Persona.findByPk(personaId)
-        .then(persona => {
-            Persona.destroy();
-            res.status(200).json({ message: 'Persona Eliminada...!' });
-        })
-        .catch(err => {
-            res.status(404).json({ message: 'Persona  No Existe...!' });
-        });
-};
-*/
-
 module.exports = {
     saveHonorario,
     updateHonorario,
     deleteHonorario,
-    listHonorario,
-    listHonorarioEstadoActivo,
+    listHonorarioEstadoPago,
+    listHonorarioEstadoDeuda,
     listarHonorarioId
 };

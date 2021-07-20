@@ -1,13 +1,16 @@
-'use strict'
 var fs = require('fs');
 var path = require('path');
-var Demanda = require('../model/demanda');
-var Persona = require('../model/persona')
-var User = require('../model/usuario');
+var Demanda = require('../models/demanda');
+var Abogado = require('../models/abogado');
+var Persona = require('../models/persona');
 var dbat = require('../database/db');
+const Sequelize = require('Sequelize');
+const op = Sequelize.Op;
+require('../config/asociations');
+
 
 function saveDemanda(req, res) {
-    const today = new Date();
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     const DemandaData = {
         tipo_DEMANDA: req.body.tipo_DEMANDA,
         fecha_DEMANDA: req.body.fecha_DEMANDA,
@@ -40,7 +43,7 @@ function saveDemanda(req, res) {
     }).catch(err => {
         res.send('error: ' + err);
     })
-}
+};
 
 function updateDemanda(req, res) {
     var demandaId = req.params.id;
@@ -49,7 +52,7 @@ function updateDemanda(req, res) {
         where: { idDemandas: demandaId }
 
     }).then(demandita => {
-        const today = new Date();
+        const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
         Demanda.update({
             tipo_DEMANDA: req.body.tipo_DEMANDA,
             fecha_DEMANDA: req.body.fecha_DEMANDA,
@@ -72,7 +75,7 @@ function deleteDemanda(req, res) {
     var demandaId = req.params.id;
     var useridd = req.body.iduser;
     var codigo = req.body.codigo;
-    const today = new Date();
+    const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     User.findOne({ where: { idUsuario: useridd, codigo_Seguridad_USUARIO: codigo } })
         .then(user => {
             if (user) {
@@ -100,92 +103,30 @@ function deleteDemanda(req, res) {
         })
 };
 
-
-function listDemanda(req, res) {
-    Demanda.findAll()
-        .then(demandita => {
-            res.send(demandita)
-        })
-};
-
-function listDemandaEstadoActivo(req, res) {
+function listDemandaActivo(req, res) {
     Demanda.findAll({
-        where: {
-            estado_DEMANDA: 'ACTIVO'
-        }
+        include:[ {
+            model: Abogado,
+            as: 'abogado',
+            where: {
+                '$abogado.estado_ABOGADO$': { [op.eq]: 'ACTIVO' }
+            }
+        },{
+            model: Persona,
+            as: 'persona',
+            where: {
+                '$persona.estado_Usuario_PERSONA$': { [op.eq]: 'ACTIVO' }
+            }
+        }],
     })
-        .then(demandita => {
-            res.send(demandita)
+        .then(demanda => {
+            res.send(demanda);
         })
 };
-
-function listarDemandaId(req, res) {
-    var demandaId = req.params.id;
-    Demanda.findOne({ where: { idDemandas: demandaId } })
-        .then(demandita => {
-            res.send(demandita)
-        })
-};
-
-function listarDemandaRadicado(req, res) {
-    var radicado_DEMANDA = req.body.radicado_DEMANDA;
-    Demanda.findOne({ where: { radicado_DEMANDA: radicado_DEMANDA } })
-        .then(demandita => {
-            res.send(demandita)
-        })
-};
-
-/*function getCliente(req, res) {
-    dbat.sequelize.query('SELECT * FROM personas WHERE genero = :genero ',
-        {
-            replacements: { tipo_PERSONA: 'CLIENTE' },
-            type: dbat.sequelize.QueryTypes.SELECT
-        }
-    ).then(clientecitos => {
-        res.send(clientecitos)
-    })
-};
-
-
-function deletePerson(req, res) {
-    var personaId = req.params.id;
-    Persona.findByPk(personaId)
-        .then(persona => {
-            Persona.destroy();
-            res.status(200).json({ message: 'Persona Eliminada...!' });
-        })
-        .catch(err => {
-            res.status(404).json({ message: 'Persona  No Existe...!' });
-        });
-};
-*/
-
-/*function listarDemandasCompletas(req, res){
-    db.seq.query('SELECT * FROM ((`demandas` as dem INNER JOIN `personas` as pert ON dem.id_Abogado_DEMANDA = pert.idPersonas) INNER JOIN `personas`as pertu ON dem.id_Cliente_DEMANDA = pertu.idPersonas)').success(function(rows){
-        res.json(rows);
-    });
-
-}*/
-/*function listarDemandasCompletas(req, res){
-    Demanda.findAll({
-        include: [{
-          model: Persona,
-      //  required: false
-         }]
-      }).then(demandita => {
-        console.log('Hola');
-      });
-    
-}*/
-
-
 
 module.exports = {
     saveDemanda,
     updateDemanda,
     deleteDemanda,
-    listDemanda,
-    listarDemandaId,
-    listarDemandaRadicado,
-    listDemandaEstadoActivo
+    listDemandaActivo
 };
