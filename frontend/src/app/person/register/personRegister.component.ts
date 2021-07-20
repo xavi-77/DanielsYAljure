@@ -95,7 +95,7 @@ export class PersonRegisterComponent {
                 '<a href="{3}" target="{4}" data-notify="url"></a>' +
                 '</div>'
             });
-            this._router.navigateByUrl('/');
+            this._router.navigate(['/persona/a880d76bedafc66b55868a3b4e9e661d14012154db0314cad1bb0988e516707abcdbcade36b5b26966da2696b3c3a0571e28ff2a1a8ff83b49dc26ce3d23bcda']);
 
           }
 

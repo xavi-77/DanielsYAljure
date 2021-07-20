@@ -161,6 +161,14 @@ function listActivo(req, res) {
         })
 };
 
+function listarPersonId(req, res) {
+    var personaId = req.params.id;
+    Persona.findOne({ where: { idPersonas: personaId } })
+        .then(persona => {
+            res.send(persona)
+        })
+};
+
 /*
 function listPerson(req, res) {
     Persona.findAll()
@@ -169,13 +177,7 @@ function listPerson(req, res) {
         })
 };
 
-function listarPersonId(req, res) {
-    var personaId = req.params.id;
-    Persona.findOne({ where: { idPersonas: personaId } })
-        .then(persona => {
-            res.send(persona)
-        })
-};
+
 
 function listAbogado(req, res) {
     Persona.findAll({ where: { tipo_PERSONA: "ABOGADO" } })
@@ -238,7 +240,8 @@ module.exports = {
     deletePerson,
     uploadImage,
     getImageFile,
-    listActivo
+    listActivo,
+    listarPersonId
     /*listPerson,
     getAbogado,
     getCliente,

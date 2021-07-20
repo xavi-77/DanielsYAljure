@@ -12,19 +12,19 @@
               </div>
               <div class="card-body">
                 <mat-form-field class="example-full-width">
-                  <input matInput type="text" #name="ngModel" name="tipodemanda" [(ngModel)]="demanda.tipo_DEMANDA"
+                  <input matInput type="text" #name="ngModel" name="tipodemanda" [(ngModel)]="tipo_DEMANDA"
                     placeholder="Tipo de Demanda" type="text" required="true">
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
-                  <input matInput type="text" #name="ngModel" name="especialidad" [(ngModel)]="demanda.especialida_DEMANDA"
+                  <input matInput type="text" #name="ngModel" name="especialidad" [(ngModel)]="especialida_DEMANDA"
                     placeholder="Especialidad" type="text" required="true">
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
-                  <input matInput type="text" #name="ngModel" name="radicado" [(ngModel)]="demanda.radicado_DEMANDA"
+                  <input matInput type="text" #name="ngModel" name="radicado" [(ngModel)]="radicado_DEMANDA"
                     placeholder="Numero de Radicado" type="text" required="true">
                 </mat-form-field>
                 <mat-form-field class="example-full-width">
-                  <input matInput type="text" #name="ngModel" name="juzgado" [(ngModel)]="demanda.juzgado_Origen_DEMANDA"
+                  <input matInput type="text" #name="ngModel" name="juzgado" [(ngModel)]="juzgado_Origen_DEMANDA"
                     placeholder="Juzgado Origen" type="text" required="false">
                 </mat-form-field>
                 <mat-form-field>
@@ -45,7 +45,7 @@
                   </mat-form-field>
                 <mat-form-field>
                   <input matInput [matDatepicker]="picker" #name="ngModel" name="fecharadicado"
-                    [(ngModel)]="demanda.fecha_DEMANDA" placeholder="Fecha De Radicación"
+                    [(ngModel)]="fecha_DEMANDA" placeholder="Fecha De Radicación"
                     (click)="picker.open()">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker startView="year"></mat-datepicker>
@@ -55,7 +55,7 @@
               </div>
               <div class="card-footer text-right">
   
-                <button mat-raised-button type="submit" class="btn btn-loginp">Registrar</button>
+                <button mat-raised-button type="submit" class="btn btn-loginp">Regresar</button>
               </div>
             </form>
           </div>

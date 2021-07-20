@@ -96,7 +96,7 @@ export class PersonUpdateComponent implements OnInit {
 
                         } else {
                             // Subir la imagen del alblum
-                            this._uploadService.makeFileRequest(this.url +'693dd2f438b22e2c2cdfd356bd04ce3111acd176f77f2dda964f1bba0d532260/'+ id, [], this.filesToUpload, this.token, 'image')
+                            this._uploadService.makeFileRequest(this.url +'3d58305e1e8413437fb043c55925d327f00f425409b7eb95454052c660e60c7c/'+ id, [], this.filesToUpload, this.token, 'image')
                                 .then(
                                     (result) => {
                                         this._router.navigate(['/persona/a880d76bedafc66b55868a3b4e9e661d14012154db0314cad1bb0988e516707abcdbcade36b5b26966da2696b3c3a0571e28ff2a1a8ff83b49dc26ce3d23bcda']);

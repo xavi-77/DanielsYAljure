@@ -58,14 +58,14 @@ export class DemandaDetailsComponent implements OnInit {
         })
     }
     onDetallePersona(){
-        this._router.navigate(['/demanda/70098a45fdb68758e402118323a910d8e1541ab04c1bccf1252995527194d12633303219c0615a280d3cf4a5e82bdbba21f8e35373de5426910986b96beb399f']);
+        this._router.navigate(['/persona/70098a45fdb68758e402118323a910d8e1541ab04c1bccf1252995527194d12633303219c0615a280d3cf4a5e82bdbba21f8e35373de5426910986b96beb399f']);
     }
     
 
     getDemandaDetalle() {
         this._route.params.forEach((params: Params) => {
             let id = params['id'];
-            this._demandaService.getDemandaId(this.token, id).subscribe(
+            this._demandaService.getDemandasPersona(this.token, id).subscribe(
                 response => {
                     if (!response) {
                         this._router.navigate(['/demanda/70098a45fdb68758e402118323a910d8e1541ab04c1bccf1252995527194d12633303219c0615a280d3cf4a5e82bdbba21f8e35373de5426910986b96beb399f']);

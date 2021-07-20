@@ -139,13 +139,13 @@ export class DemandaListComponent implements OnInit, AfterViewInit {
 
     let token = localStorage.getItem('token');
 
-    this._demandaService.getDemandas(token).subscribe(
+    this._demandaService.getDemandasPersona(token).subscribe(
       response => {
 
         if (response) {
           this.dataTable = {
-            headerRow: ['N°', 'RADICADO', 'CLIENTE', 'ABOGADO', 'TIPO', 'ESPECIALIDAD','JUZGADO ORIGEN', 'BOTONES'],
-            footerRow: ['N°', 'RADICADO', 'CLIENTE', 'ABOGADO', 'TIPO', 'ESPECIALIDAD','JUZGADO ORIGEN', 'BOTONES'],
+            headerRow: ['N°', 'RADICADO', 'CLIENTE', 'TIPO', 'ESPECIALIDAD','JUZGADO ORIGEN', 'BOTONES'],
+            footerRow: ['N°', 'RADICADO', 'CLIENTE', 'TIPO', 'ESPECIALIDAD','JUZGADO ORIGEN', 'BOTONES'],
 
             dataRows: []
 
@@ -154,7 +154,7 @@ export class DemandaListComponent implements OnInit, AfterViewInit {
           for (let i = 0; i < Object.keys(response).length; i++) {
             const suma = i + 1;
             this.dataTable.dataRows.push(
-              [suma, response[i].radicado_DEMANDA,response[i].id_Cliente_DEMANDA, response[i].id_Abogado_DEMANDA, response[i].tipo_DEMANDA, response[i].especialida_DEMANDA,response[i].juzgado_Origen_DEMANDA, '/demanda/a8eb56ac895796852576a2294df407e94fe0eb34a2ff5774e3f66a46119b7ba4ab2329c6630a8623ac862b2ce48e8adf151fb4278f24a820651cb937b7f8733f/' + response[i].idDemandas , response[i].idDemandas , '/demanda/5216aab0d87c9b0c204df7fbacc093ce9bce5e110e94311c14ee1fa9cc08badd94d661af3d1b8c4f37b7606353c3332e6dedc5a1577cef4b58e8f771d87d3f05/' + response[i].idDemandas]
+              [suma, response[i].radicado_DEMANDA,response[i].nombres_PERSONA+' '+response[i].p_Apellido_PERSONA, response[i].tipo_DEMANDA, response[i].especialida_DEMANDA,response[i].juzgado_Origen_DEMANDA, '/demanda/a8eb56ac895796852576a2294df407e94fe0eb34a2ff5774e3f66a46119b7ba4ab2329c6630a8623ac862b2ce48e8adf151fb4278f24a820651cb937b7f8733f/' + response[i].idDemandas , response[i].idDemandas , '/demanda/5216aab0d87c9b0c204df7fbacc093ce9bce5e110e94311c14ee1fa9cc08badd94d661af3d1b8c4f37b7606353c3332e6dedc5a1577cef4b58e8f771d87d3f05/' + response[i].idDemandas]
               )
           }
 

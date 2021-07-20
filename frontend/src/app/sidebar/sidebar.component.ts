@@ -67,6 +67,7 @@ export class SidebarComponent implements OnInit {
     public token;
     public imagen;
     public global;
+    public tipo;
     ps: any;
     isMobileMenu() {
         if ($(window).width() > 991) {
@@ -81,12 +82,13 @@ export class SidebarComponent implements OnInit {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
             this.ps = new PerfectScrollbar(elemSidebar);
         }
-        this.global = 'http://localhost:3000/Daniels&Aljure/036368441d3a87c00980486b33b06d200219207c4f5fa28634eb3812d214e2ce'
+        this.global = 'http://localhost:3000/Daniels&Aljure/1c3f34b752b47016f4071f145501442cbf11c15221ef5df02b7e0b74c864e642'
         var identityaa = JSON.parse(localStorage.getItem("identity"));
-        this.nombre = identityaa.nombre_USUARIO;
-        this.apellido = identityaa.p_Apellido_USUARIO;
-        this.apellido1 = identityaa.s_Apellido_USUARIO;
-        this.imagen = identityaa.imagen_USUARIO;
+        this.nombre = identityaa.abogado.nombres_ABOGADO;
+        this.apellido = identityaa.abogado.p_Apellido_ABOGADO;
+        this.imagen = identityaa.abogado.imagen_ABOGADO;
+        this.tipo = identityaa.abogado.tipo_ABOGADO;
+        console.log(identityaa);
     }
 
     updatePS(): void  {

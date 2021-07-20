@@ -34,7 +34,7 @@ export class PersonaService {
 			return this._http.get(this.url + 'ff4f4ce4cf5bcc3c9613176748b9880e28524745808a88729cf93c732e6d7cd8', { headers: headers }).map(res => res);
 
 		} else {
-			return this._http.get(this.url + '6349b485fc8d94fe48f20190106cb8ef6d2e2db5f9631bfcd47f374cf0196c30/' + idPersonas, { headers: headers }).map(res => res);
+			return this._http.get(this.url + '5e2e7cf32f93987f701f4abd64637adc3fb659a4bd962dc687cc85c443e8f036/' + idPersonas, { headers: headers }).map(res => res);
 		}
 
 	}
@@ -44,7 +44,7 @@ export class PersonaService {
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
-		return this._http.get(this.url + '6349b485fc8d94fe48f20190106cb8ef6d2e2db5f9631bfcd47f374cf0196c30/' + id, { headers: headers })
+		return this._http.get(this.url + '5e2e7cf32f93987f701f4abd64637adc3fb659a4bd962dc687cc85c443e8f036/' + id, { headers: headers })
 			.map(res => res);
 	}
 
@@ -146,7 +146,7 @@ export class PersonaService {
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
-		return this._http.get(this.url + 'a8fea2a8eae2acb92d9b32f9f8f43a8e6bff78a52de0aef38f9f5798982259b8', { headers: headers }).map(res => res);
+		return this._http.get(this.url + 'ff4f4ce4cf5bcc3c9613176748b9880e28524745808a88729cf93c732e6d7cd8', { headers: headers }).map(res => res);
 
 	}
 
@@ -198,5 +198,4 @@ export class PersonaService {
 			});
 		});
 	};
-
 }

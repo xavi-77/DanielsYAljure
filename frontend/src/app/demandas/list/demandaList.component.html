@@ -6,7 +6,7 @@
                     <div class="card card-plain">
                         <div class="card-body text-center">
                             <button mat-raised-button type="button" class="btn btn-loginp  text-center"
-                                onclick="location.href='http://localhost:4200/#/persona/f0b648fa39712ba2bba9b2ff0ebb6044deaafbf29e6b75b89dee96ab05522cdf626ff2ad5e07aba65978faf9c241a58a3536b10a512366407ce80a3cc7db3fe5'">
+                                onclick="location.href='http://localhost:4200/#/demanda/73d418fec8237a33c5dda0a770544df8d031077d2bc37ad0cd574bbf3e78014ca51eacc170dd67a971c7d8b7c3d50205a41452419cf11ddd1178fb27fedbd2cc'">
                                 <i class="material-icons">add</i>
                                 Añadir Demanda
                             </button>
@@ -33,7 +33,6 @@
                                         <th class="text-center">{{ dataTable.headerRow[4] }}</th>
                                         <th class="text-center">{{ dataTable.headerRow[5] }}</th>
                                         <th class="text-center">{{ dataTable.headerRow[6] }}</th>
-                                        <th class="text-center">{{ dataTable.headerRow[7] }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,17 +43,16 @@
                                         <td class="td-actions text-center">{{row[3]}}</td>
                                         <td class="td-actions text-center">{{row[4]}}</td>
                                         <td class="td-actions text-center">{{row[5]}}</td>
-                                        <td class="td-actions text-center">{{row[6]}}</td>
                                         <td class="text-right">
-                                            <a routerLink="{{row[7]}}"
+                                            <a routerLink="{{row[6]}}"
                                                 class="btn btn-link btn-success btn-just-icon edit"><i
                                                     class="material-icons">edit</i></a>
 
-                                            <a routerLink="{{row[9]}}"
+                                            <a routerLink="{{row[8]}}"
                                                 class="btn btn-link btn-loginp btn-just-icon like"><i
                                                     class="material-icons">list_alt</i></a>
 
-                                            <button (click)="showSwal(row[8])"
+                                            <button (click)="showSwal(row[7])"
                                                 class="btn btn-link btn-danger btn-just-icon remove"><i
                                                     class="material-icons">delete</i></button>
                                         </td>

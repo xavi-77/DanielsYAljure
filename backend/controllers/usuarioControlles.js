@@ -85,6 +85,10 @@ function listUsuario(req, res) {
 
 function login(req, res) {
     User.findOne({
+        include: {
+            model: Abogado,
+            as: 'abogado'
+        },
         where: {
             correo_USUARIO: req.body.correo_USUARIO,
             estado_USUARIO: 'ACTIVO'
@@ -111,7 +115,7 @@ function login(req, res) {
                                 })
 
                         } else {
-                            res.status(200).send({ user })
+                            res.status(200).send({ user });
                         }
                     } else {
                         res.status(404).send({ message: 'La cuenta o la contraseña es incorrecta. Si no recuerdas la cuenta o la contraseña pida ayuda al administrador!' });
@@ -142,6 +146,43 @@ function listUsuarioaa(req, res) {
         .then(user => {
             res.send(user)
         })
+};
+function uploadImage(req, res) {
+    var userId = req.params.id;
+    var file_name = 'No Subido...!';
+    
+    if (req.files) {
+        var file_path = req.files.image.path;
+        var file_split = file_path.split('\\');
+        var file_name = file_split[2];
+
+        var ext_split = file_name.split('\.');
+        var file_ext = ext_split[1];
+        if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'PNG' || file_ext == 'JPG' || file_ext == 'GIF') {
+            User.update({
+                imagen_USUARIO: file_name
+            }, { where: { idUsuario : userId } })
+                .then(nuevoUsuario => {
+                    res.json(nuevoUsuario)
+                })
+        } else {
+            res.status(200).send({ message: 'La Extension Del Archivo No Es Valida...!' });
+        }
+    } else {
+        res.status(200).send({ message: 'No Has Subido Ninguna Imagen...!' });
+    }
+};
+
+function getImageFile(req, res) {
+    var imageFile = req.params.imageFile;
+    var path_file = './uploads/usuar/' + imageFile;
+    var ruta_enc = fs.existsSync(path_file);
+    if (ruta_enc) {
+        res.sendFile(path.resolve(path_file));
+    } else {
+        res.status(200).send({ message: 'No Existe La Imagen...!' });
+    }
+
 };
 /*
 
@@ -312,6 +353,8 @@ module.exports = {
     updateUsuario,
     listUsuario,
     login,
+    uploadImage,
+    getImageFile,
     listUsuarioaa
     /* 
      deleteUsuario,
@@ -321,7 +364,6 @@ module.exports = {
      getUserAbogados,
      getUserADMIN,
      getPersona,
-     uploadImage,
-     getImageFile*/
+     */
 
 };

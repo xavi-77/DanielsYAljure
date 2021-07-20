@@ -8,6 +8,7 @@ import { GLOBAL } from '../../services/global';
 import { DemandaService } from '../services/demanda.service';
 import { PersonaService } from '../../person/services/person.services';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Persona } from 'src/app/models/persona';
 
 
 declare var $: any;
@@ -28,6 +29,10 @@ export class DemandaRegisterComponent {
   public alertMessage;
   demandas: Demanda[];
   clientes: any;
+  public person: Persona;
+  abog: Array<Object>;
+  clienta: Array<Object>;
+
 
   constructor(
 
@@ -41,27 +46,14 @@ export class DemandaRegisterComponent {
     this.identity = this._demandaService.getIdentity();
     this.token = this._demandaService.getToken();
     this.url = GLOBAL.url;
-    this.demanda = new Demanda('','','', '', '', '', '', '', '', '', '', '', 'ACTIVO');
+    this.demanda = new Demanda('', '', '', '', '', '', '', '', '', '', '', '', 'ACTIVO');
+    this.person = new Persona('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
   }
 
   ngOnInit() {
-   
+
     let token = localStorage.getItem('token');
-
-    this._personaService.listPersonaAbogado(token).subscribe(
-        demandita => {
-            this.abogados = demandita;
-        }
-
-    );
-
-    this._personaService.listPersonaCliente(token).subscribe(
-        demandita => {
-            this.clientes = demandita;
-        }
-
-    );
   }
 
   onRegistrarDemanda() {
@@ -94,7 +86,7 @@ export class DemandaRegisterComponent {
                 '<a href="{3}" target="{4}" data-notify="url"></a>' +
                 '</div>'
             });
-            this._router.navigateByUrl('/');
+            this._router.navigate(['/demanda/70098a45fdb68758e402118323a910d8e1541ab04c1bccf1252995527194d12633303219c0615a280d3cf4a5e82bdbba21f8e35373de5426910986b96beb399f']);
 
           }
 

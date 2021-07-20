@@ -199,4 +199,18 @@ export class DemandaService {
 		});
 	};
 
+	getDemandasPersona(token, idDemandas  = null) {
+		let headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'Authorization': token
+		});
+
+		if (idDemandas  == null) {
+			return this._http.get(this.url + 'f2982ab308781e9585da1c2e792c162b1d754bb5ecbcc04a3a1fc56170637a05', { headers: headers }).map(res => res);
+
+		} else {
+			return this._http.get(this.url + '122f5594bf76ce04a28ca8b7f61666fbcbe0a33b4032684988b6726909ed32d9/' + idDemandas, { headers: headers }).map(res => res);
+		}
+
+	}
 }

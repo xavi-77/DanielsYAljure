@@ -104,7 +104,7 @@ function deleteAbogado(req, res) {
 };
 
 function uploadImage(req, res) {
-    var personaId = req.params.id;
+    var abogadoId = req.params.id;
     var file_name = 'No Subido...!';
 
     if (req.files) {

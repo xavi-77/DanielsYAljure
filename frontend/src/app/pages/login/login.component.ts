@@ -157,6 +157,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                                 // Crear Elemento en el localStorage para tener el token disponible.
                                 localStorage.setItem('token', token);
                                 this.authService.isLoggedIn();
+                                this.navigate();
                             }
                         }, error => {
                             var errorSubmita = <any>error;
@@ -215,7 +216,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                             '</div>'
                     });
                 }
-            }, () => this.navigate()
+            }
         );
     }
 
