@@ -12,6 +12,11 @@ import { PersonRegisterComponent } from './register/personRegister.component';
 import { PersonListComponent } from './list/personList.component';
 import { PersonUpdateComponent } from './update/personUpdate.component';
 import { PersonDetailsComponent } from './details/personDetails.component';
+import { AbogadoRegisterComponent } from './register/abogadoRegister.component';
+import { AbogadoUpdateComponent } from './update/abogadoUpdate.component';
+import { AbogadoListComponent } from './list/abogadoList.component';
+import { AbogadoDetailsComponent } from './details/abogadoDetails.component';
+
 
 
 
@@ -29,7 +34,11 @@ import { PersonDetailsComponent } from './details/personDetails.component';
     PersonRegisterComponent,
     PersonListComponent,
     PersonUpdateComponent,
-    PersonDetailsComponent
+    PersonDetailsComponent,
+    AbogadoRegisterComponent,
+    AbogadoUpdateComponent,
+    AbogadoListComponent,
+    AbogadoDetailsComponent
   ]
 })
 

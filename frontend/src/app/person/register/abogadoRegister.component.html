@@ -1,0 +1,90 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="card">
+                    <form #formBovino="ngForm" (ngSubmit)="onRegistrarPersona()">
+                        <div class="card-header card-header-loginp card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">people_alt</i>
+                            </div>
+                            <h4 class="card-title">Registrar Abogado</h4>
+                        </div>
+                        <div class="card-body">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="nombre"
+                                    [(ngModel)]="abogado.nombres_ABOGADO" placeholder="Primer Nombre" type="text"
+                                    required="true">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="nombre"
+                                    [(ngModel)]="abogado.s_Nombre_ABOGADO" placeholder="Segundo Nombre" type="text"
+                                    required="true">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="p_apellido"
+                                    [(ngModel)]="abogado.p_Apellido_ABOGADO" placeholder="Primer Apellido" type="text"
+                                    required="true">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="s_apellido"
+                                    [(ngModel)]="abogado.s_Apellido_ABOGADO" placeholder="Segundo Apellido" type="text"
+                                    required="false">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-select matInput #name="ngModel" name="Tipo_Documento"
+                                    [(ngModel)]="abogado.tipo_Documento_ABOGADO" placeholder="Tipo De Documento"
+                                    required="true">
+                                    <mat-option *ngFor="let documento of documentos" [value]="documento.value">
+                                        {{ documento.viewValue }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="num_documento"
+                                    [(ngModel)]="abogado.numero_Documento_ABOGADO " placeholder="Numero Documento"
+                                    type="text" required="true">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="num_documento_profesional"
+                                    [(ngModel)]="abogado.numero_Documento_Profesional_ABOGADO " placeholder="Numero Tarjeta Profesional"
+                                    type="text" required="true">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker" #name="ngModel" name="fecha_nacimiento"
+                                    [(ngModel)]="abogado.fehca_Nacimiento_ABOGADO" placeholder="Fecha De Nacimiento"
+                                    (click)="picker.open()">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker startView="year"></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="direccion"
+                                    [(ngModel)]="abogado.direccion_ABOGADO" placeholder="Dirección" type="text"
+                                    required="false">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="telefono"
+                                    [(ngModel)]="abogado.celular_ABOGADO" placeholder="Teléfono" type="text"
+                                    required="false">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-select matInput placeholder="Pensionado" #name="ngModel" name="tipo_abogado"
+                                    [(ngModel)]="abogado.tipo_ABOGADO" required="false">
+                                    <mat-option *ngFor="let tipoa of tipoabogados" [value]="tipoa.value">
+                                        {{ tipoa.viewValue }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div class="category form-category">* Campos Obligatorios</div>
+
+                        </div>
+                        <div class="card-footer text-right">
+
+                            <button mat-raised-button type="submit" class="btn btn-loginp">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>

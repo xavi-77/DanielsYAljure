@@ -149,13 +149,22 @@ function listActivo(req, res) {
         })
 };
 
+function listActivoID(req, res) {
+    var abogadoId = req.params.id
+    Abogado.findOne({ where: { idAbogados: abogadoId } })
+        .then(aboga => {
+            res.send(aboga)
+        })
+};
+
 module.exports = {
     saveAbogado,
     updateAbogado,
     deleteAbogado,
     uploadImage,
     getImageFile,
-    listActivo
+    listActivo,
+    listActivoID
     /*listPerson,
     getAbogado,
     getCliente,

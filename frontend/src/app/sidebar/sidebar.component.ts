@@ -40,6 +40,16 @@ export const ROUTES: RouteInfo[] = [{
             {path: 'a880d76bedafc66b55868a3b4e9e661d14012154db0314cad1bb0988e516707abcdbcade36b5b26966da2696b3c3a0571e28ff2a1a8ff83b49dc26ce3d23bcda', title: 'Listar Persona', ab:'LP'}
         ]
     },{
+        path: '/abogado',
+        title: 'Abogados',
+        type: 'sub',
+        icontype: 'people_alt',
+        collapse: 'abogado',
+        children: [
+            {path: 'c05057eb5b423590a658ee06ff19b6097ff8404ea229ed9a4277fd9da0639656c7fcf1e0df0ddce6215bffb8853b5e14146cb69a5c5500e7198b6a7c417eb886', title: 'Registrar Abogado', ab:'RA'},
+            {path: 'b686777e88d6e6b80d295dc19596ec35a03352670e38f3524519b0bd41a069ce7c98e7ba33b4f2e9a5dff4dcb1c8f724cbd8a983af155b0f08a3a9a199017ecc', title: 'Listar Abogado', ab:'LA'}
+        ]
+    },{
         path: '/demanda',
         title: 'Demandas',
         type: 'sub',
@@ -88,7 +98,6 @@ export class SidebarComponent implements OnInit {
         this.apellido = identityaa.abogado.p_Apellido_ABOGADO;
         this.imagen = identityaa.abogado.imagen_ABOGADO;
         this.tipo = identityaa.abogado.tipo_ABOGADO;
-        console.log(identityaa);
     }
 
     updatePS(): void  {
