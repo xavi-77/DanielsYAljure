@@ -24,13 +24,13 @@ export class DemandaService {
 
 	}
 
-	getDemandas(token, idDemandas  = null) {
+	getDemandas(token, idDemandas = null) {
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
 
-		if (idDemandas  == null) {
+		if (idDemandas == null) {
 			return this._http.get(this.url + '4658f0073a07acb51f9f155f77916b078b8246a02d54c756f2f27adef51d150e', { headers: headers }).map(res => res);
 
 		} else {
@@ -39,7 +39,7 @@ export class DemandaService {
 
 	}
 
-	getDemandaId(token, id:string) {
+	getDemandaId(token, id: string) {
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
@@ -54,7 +54,7 @@ export class DemandaService {
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
-		if (demanda.radicado_DEMANDA == '' ||demanda.radicado_DEMANDA == ' ' || demanda.juzgado_Origen_DEMANDA == '' || demanda.juzgado_Origen_DEMANDA == ' ' || demanda.id_Abogado_DEMANDA == '' || demanda.id_Abogado_DEMANDA == ' ' || demanda.id_Cliente_DEMANDA == '' || demanda.id_Cliente_DEMANDA == ' ') {
+		if (demanda.radicado_DEMANDA == '' || demanda.radicado_DEMANDA == ' ' || demanda.juzgado_Origen_DEMANDA == '' || demanda.juzgado_Origen_DEMANDA == ' ' || demanda.id_Abogado_DEMANDA == '' || demanda.id_Abogado_DEMANDA == ' ' || demanda.id_Cliente_DEMANDA == '' || demanda.id_Cliente_DEMANDA == ' ') {
 			$.notify({
 				icon: 'warning',
 				message: '¡Rellene Todos los Campos De Forma Correcta!'
@@ -115,11 +115,11 @@ export class DemandaService {
 			'Authorization': token
 		});
 
-		return this._http.put(this.url + 'eb6ba149e636dade12e394db69c412a6993749a7fd97cf2b5c15d2a4717e6183/' + id, params, { headers: headers }).map(res => res);
+		return this._http.put(this.url + '6ef26298cb7a4a464fa200f96a40f69ee851fd3bea714c8e7927d35d037fb905/' + id, params, { headers: headers }).map(res => res);
 	}
 
-	deleteDemanda(token, id: string, idus:string, codigo:string) {
-		let datica ={
+	deleteDemanda(token, id: string, idus: string, codigo: string) {
+		let datica = {
 			iduser: idus,
 			codigo: codigo
 		}
@@ -131,7 +131,7 @@ export class DemandaService {
 		return this._http.post(this.url + 'b5bc3c9a03d23fdefa31add286c1650a340daf0845f4e6c9b0089f35440fd48b/' + id, params, { headers: headers }).map(res => res);
 	}
 
-	listDemandaRadicado(token){
+	listDemandaRadicado(token) {
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
@@ -141,7 +141,7 @@ export class DemandaService {
 
 	}
 
-	listDemandaporId(token, id: string){
+	listDemandaporId(token, id: string) {
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
@@ -199,18 +199,36 @@ export class DemandaService {
 		});
 	};
 
-	getDemandasPersona(token, idDemandas  = null) {
+	getDemandasPersona(token, idDemandas = null) {
 		let headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': token
 		});
 
-		if (idDemandas  == null) {
+		if (idDemandas == null) {
 			return this._http.get(this.url + 'f2982ab308781e9585da1c2e792c162b1d754bb5ecbcc04a3a1fc56170637a05', { headers: headers }).map(res => res);
 
 		} else {
 			return this._http.get(this.url + '122f5594bf76ce04a28ca8b7f61666fbcbe0a33b4032684988b6726909ed32d9/' + idDemandas, { headers: headers }).map(res => res);
 		}
 
+	}
+
+	getDemandasActivas(token) {
+		let headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'Authorization': token
+		});
+
+		return this._http.get(this.url + 'cc7e41621533022913ef2f1964dda49f820a27f70bfdf97ce4d023dfd2b204f6/', { headers: headers }).map(res => res);
+	}
+
+	getDemandasActivasID(token, id: string) {
+		let headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'Authorization': token
+		});
+
+		return this._http.get(this.url + 'e24eda161216efb3543a38375231d143fa27462ddb370db58f19db8db86110bd/'+ id, { headers: headers }).map(res => res);
 	}
 }

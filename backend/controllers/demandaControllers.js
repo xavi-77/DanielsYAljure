@@ -107,16 +107,10 @@ function listDemandaActivo(req, res) {
     Demanda.findAll({
         include:[ {
             model: Abogado,
-            as: 'abogado',
-            where: {
-                '$abogado.estado_ABOGADO$': { [op.eq]: 'ACTIVO' }
-            }
+            as: 'abogado'
         },{
             model: Persona,
-            as: 'persona',
-            where: {
-                '$persona.estado_Usuario_PERSONA$': { [op.eq]: 'ACTIVO' }
-            }
+            as: 'persona'            
         }],
     })
         .then(demanda => {
@@ -124,9 +118,43 @@ function listDemandaActivo(req, res) {
         })
 };
 
+function listDemandaActivoID(req, res) {
+    var demandaId = req.params.id
+    Demanda.findAll({
+        include:[ {
+            model: Abogado,
+            as: 'abogado'
+        },{
+            model: Persona,
+            as: 'persona',
+        }],
+        where: {
+            idDemandas: demandaId
+        }
+    })
+        .then(demanda => {
+            res.send(demanda);
+        })
+};
+
+function listDemandaActivoIDA(req, res) {
+    var demandaId = req.params.id
+    Demanda.findOne({
+        where: {
+            idDemandas: demandaId
+        }
+    })
+        .then(demanda => {
+            res.send(demanda);
+        })
+};
+
+
 module.exports = {
     saveDemanda,
     updateDemanda,
     deleteDemanda,
-    listDemandaActivo
+    listDemandaActivo,
+    listDemandaActivoID,
+    listDemandaActivoIDA
 };

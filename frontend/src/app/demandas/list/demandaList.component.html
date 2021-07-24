@@ -33,6 +33,7 @@
                                         <th class="text-center">{{ dataTable.headerRow[4] }}</th>
                                         <th class="text-center">{{ dataTable.headerRow[5] }}</th>
                                         <th class="text-center">{{ dataTable.headerRow[6] }}</th>
+                                        <th class="text-center">{{ dataTable.headerRow[7] }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,16 +44,17 @@
                                         <td class="td-actions text-center">{{row[3]}}</td>
                                         <td class="td-actions text-center">{{row[4]}}</td>
                                         <td class="td-actions text-center">{{row[5]}}</td>
+                                        <td class="td-actions text-center">{{row[6]}}</td>
                                         <td class="text-right">
-                                            <a routerLink="{{row[6]}}"
+                                            <a routerLink="{{row[7]}}"
                                                 class="btn btn-link btn-success btn-just-icon edit"><i
                                                     class="material-icons">edit</i></a>
 
-                                            <a routerLink="{{row[8]}}"
+                                            <a routerLink="{{row[9]}}"
                                                 class="btn btn-link btn-loginp btn-just-icon like"><i
                                                     class="material-icons">list_alt</i></a>
 
-                                            <button (click)="showSwal(row[7])"
+                                            <button (click)="showSwal(row[8])"
                                                 class="btn btn-link btn-danger btn-just-icon remove"><i
                                                     class="material-icons">delete</i></button>
                                         </td>

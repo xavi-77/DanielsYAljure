@@ -6,6 +6,7 @@ import { Persona } from '../../models/persona';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GLOBAL } from '../../services/global';
 import { UploadService } from '../../services/upload.service';
+import { AbogadoService } from '../../person/services/abogado.services';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -14,23 +15,24 @@ declare var $: any;
 @Component({
     selector: 'app-demanda-detalle',
     templateUrl: './demandaDetails.component.html',
-    providers: [PersonaService, UploadService, DemandaService]
+    providers: [PersonaService, UploadService, DemandaService, AbogadoService]
 })
 
 export class DemandaDetailsComponent implements OnInit {
-    public demanda: Demanda;
+    
     public identity;
     public token;
     public abogados: any;
     public url: string;
     public alertMessage;
-    public demand;
+    public demanda;
     demandas: Demanda[];
     clientes: any;
 
     constructor(
         private _demandaService: DemandaService,
         private _PersonaService: PersonaService,
+        private _abogadoService: AbogadoService,
         private _route: ActivatedRoute,
         private _router: Router,
         private _uploadService: UploadService
@@ -45,6 +47,20 @@ export class DemandaDetailsComponent implements OnInit {
         this.getDemandaDetalle();
         let token = localStorage.getItem('token');
 
+        this._PersonaService.getPersonas(token).subscribe(
+            pers => {
+                this.clientes = pers;
+            }
+
+        );    
+        
+        this._abogadoService.getAbogados(token).subscribe(
+            abog => {
+                this.abogados = abog;
+            }
+
+        );    
+
     }
 
     showSwal(type,type2,type3) {
@@ -58,19 +74,20 @@ export class DemandaDetailsComponent implements OnInit {
         })
     }
     onDetallePersona(){
-        this._router.navigate(['/persona/70098a45fdb68758e402118323a910d8e1541ab04c1bccf1252995527194d12633303219c0615a280d3cf4a5e82bdbba21f8e35373de5426910986b96beb399f']);
+        this._router.navigate(['/demanda/70098a45fdb68758e402118323a910d8e1541ab04c1bccf1252995527194d12633303219c0615a280d3cf4a5e82bdbba21f8e35373de5426910986b96beb399f']);
     }
     
 
     getDemandaDetalle() {
         this._route.params.forEach((params: Params) => {
             let id = params['id'];
-            this._demandaService.getDemandasPersona(this.token, id).subscribe(
+            this._demandaService.getDemandasActivasID(this.token, id).subscribe(
                 response => {
                     if (!response) {
                         this._router.navigate(['/demanda/70098a45fdb68758e402118323a910d8e1541ab04c1bccf1252995527194d12633303219c0615a280d3cf4a5e82bdbba21f8e35373de5426910986b96beb399f']);
                     } else {
-                        this.demand = response;
+                        console.log(response);
+                        this.demanda = response;
 
                     }
                 },

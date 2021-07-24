@@ -30,16 +30,16 @@
                 <mat-form-field>
                   <mat-select matInput #name="ngModel" name="abogado" [(ngModel)]="demanda.id_Abogado_DEMANDA"
                     placeholder="Abogado" required="true">
-                    <mat-option *ngFor="let abogadito of abogados" [value]="abogadito.id_Abogado_DEMANDA">
-                      {{ abogadito.nombres_PERSONA }}+' '+{{abogadito.p_Apellido_PERSONA}}
+                    <mat-option *ngFor="let abogadito of abogados" [value]="abogadito.idAbogados">
+                      {{ abogadito.nombres_ABOGADO }} {{abogadito.p_Apellido_ABOGADO}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-select matInput #name="ngModel" name="cliente" [(ngModel)]="demanda.id_Cliente_DEMANDA"
                       placeholder="Cliente" required="true">
-                      <mat-option *ngFor="let cliente of clientes" [value]="cliente.id_Abogado_DEMANDA">
-                        {{ cliente.nombres_PERSONA }}+' '+{{cliente.p_Apellido_PERSONA}}
+                      <mat-option *ngFor="let cliente of clientes" [value]="cliente.idPersonas" >
+                          {{ cliente.nombres_PERSONA }} {{cliente.p_Apellido_PERSONA}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
