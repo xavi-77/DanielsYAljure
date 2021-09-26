@@ -50,7 +50,10 @@ export const AppRoutes: Routes = [
     },{
         path: '',
         loadChildren: './demandas/demands.module#DemandasModule'
-    },
+    },{
+        path: '',
+        loadChildren: './anexo/anexo.module#AnexosModule'
+    }
   ]}, {
       path: '',
       component: AuthLayoutComponent,

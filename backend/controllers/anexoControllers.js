@@ -15,7 +15,8 @@ function saveAnexo(req, res) {
     var file_name = 'No Subido...!';
     const today = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     if (req.files) {
-        var file_path = req.files.fichero.path;
+        var file_path = req.files.image.path;
+        console.log(file_path);
         var file_split = file_path.split('\\');
         var file_name = file_split[2];
 
@@ -30,9 +31,10 @@ function saveAnexo(req, res) {
                 tipo_Documento_ANEXO: req.body.tipo_Documento_ANEXO,
                 fecha_Creado_ANEXO: today,
                 nombre_Documento_ANEXO: file_name,
-                estado_ANEXO: req.body.estado_ANEXO,
+                estado_ANEXO: 'ACTIVO',
                 id_Demanda_ANEXO: req.body.id_Demanda_ANEXO
             }
+            console.log(AnexoData);
 
             Anexo.findOne({
                 where: {
@@ -118,23 +120,48 @@ function deleteAnexo(req, res) {
 
 
 function listAnexoEstadoActivo(req, res) {
-    Anexo.findAll()
+    Anexo.findAll({ where: { estado_ANEXO: 'ACTIVO' } })
         .then(nuevoAnexo => {
             Anexo.findAll({
                 include: {
                     model: Demanda,
                     as: 'demanda',
                     include: [{
-                        model:Persona,
+                        model: Persona,
                         as: 'persona'
-                    },{ 
-                        model:Abogado,
+                    }, {
+                        model: Abogado,
                         as: 'abogado'
                     }]
                 }
             }).then(lolking => {
                 res.send(lolking);
             })
+        })
+};
+
+function listAnexoEstadoActivoID(req, res) {
+    var anexoId = req.params.id;
+    Anexo.findOne(
+        {
+            where: { idAnexo: anexoId },
+            include: {
+                model: Demanda,
+                as: 'demanda',
+                include: [{
+                    model: Persona,
+                    as: 'persona'
+                }, {
+                    model: Abogado,
+                    as: 'abogado'
+                }]
+            }
+        }
+    )
+        .then(nuevoAnexo => {
+
+            res.send(nuevoAnexo);
+
         })
 };
 
@@ -187,5 +214,6 @@ module.exports = {
     deleteAnexo,
     listAnexoEstadoActivo,
     uploadFichero,
-    getFicheroFile
+    getFicheroFile,
+    listAnexoEstadoActivoID
 };

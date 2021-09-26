@@ -59,6 +59,16 @@ export const ROUTES: RouteInfo[] = [{
             {path: '73d418fec8237a33c5dda0a770544df8d031077d2bc37ad0cd574bbf3e78014ca51eacc170dd67a971c7d8b7c3d50205a41452419cf11ddd1178fb27fedbd2cc', title: 'Registrar Demanda', ab:'RD'},
             {path: '70098a45fdb68758e402118323a910d8e1541ab04c1bccf1252995527194d12633303219c0615a280d3cf4a5e82bdbba21f8e35373de5426910986b96beb399f', title: 'Listar Demanda', ab:'LD'}
         ]
+    },{
+        path: '/anexo',
+        title: 'Anexos',
+        type: 'sub',
+        icontype: 'file_copy',
+        collapse: 'anexo',
+        children: [
+            {path: '632e3f16d0abc82e0f6def1ed775d72d42a2281690cc0f7c899242b953198df160131225e32d454f66279e3c9975b7dd7c02a0747ed0c9c559d76fa43f3b3b79', title: 'Registrar Anexo', ab:'RX'},
+            {path: 'dc45df201f46283ee45b94f72a256b901be0ea7bcbceca1671f03097d6f03c5e25d119e915ca59ca786aba974f658c25ef6ee96114f58021678ca5184e9e01d3', title: 'Listar Anexo', ab:'LX'}
+        ]
     }
 ];
 @Component({

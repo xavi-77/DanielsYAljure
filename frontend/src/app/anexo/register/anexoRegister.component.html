@@ -1,0 +1,60 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="card">
+                    <form #formBovino="ngForm" (ngSubmit)="onRegistrarAnexo()">
+                        <div class="card-header card-header-loginp card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">file_copy</i>
+                            </div>
+                            <h4 class="card-title">Registrar Anexo</h4>
+                        </div>
+                        <div class="card-body">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="conceptoanexo"
+                                    [(ngModel)]="anexo.concepto_ANEXO" placeholder="Concepto" type="text"
+                                    required="true">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" #name="ngModel" name="tipo_Documento"
+                                    [(ngModel)]="anexo.tipo_Documento_ANEXO" placeholder="Tipo De Anexo" type="text"
+                                    required="true">
+                            </mat-form-field>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail">
+                                        <img src="./assets/img/image_placeholder.jpg" alt="...">
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                    <div>
+                                        <span class="btn btn-rose btn-round btn-file">
+                                            <span class="fileinput-new" (change)="fileChangeEvent($event)">Seleccione Archivo</span>
+                                            <span class="fileinput-exists" (change)="fileChangeEvent($event)">Cambiar</span>
+                                            <input type="file"  (change)="fileChangeEvent($event)" />
+                                        </span>
+                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists"
+                                            data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <mat-form-field>
+                                <mat-select matInput #name="ngModel" name="demandas"
+                                    [(ngModel)]="anexo.id_Demanda_ANEXO" placeholder="Demanda" required="true">
+                                    <mat-option *ngFor="let demandita of demandas" [value]="demandita.idDemandas">
+                                        {{ demandita.radicado_DEMANDA }} - {{ demandita.juzgado_Origen_DEMANDA }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div class="category form-category">* Campos Obligatorios</div>
+
+                        </div>
+                        <div class="card-footer text-right">
+                            <button mat-raised-button type="submit" class="btn btn-loginp">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
